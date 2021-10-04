@@ -1,4 +1,4 @@
-package com.company.rummy;
+package com.company.deck;
 
 public interface Deck {
 
