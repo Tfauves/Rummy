@@ -9,7 +9,18 @@ public class Card implements Deck{
         this.RANK = RANK;
     }
 
+    public int getRANK() {
+        return RANK;
+    }
 
+    public String toString() {
+        return RANK + " " + SUIT;
+    }
+
+    @Override
+    public Card draw() {
+        return null;
+    }
 
     public void shuffle() {}
 }
