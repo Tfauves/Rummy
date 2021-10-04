@@ -17,6 +17,10 @@ public class Card implements Deck{
         return RANK + " " + SUIT;
     }
 
+    public String display() {
+
+    }
+
     @Override
     public Card draw() {
         return null;

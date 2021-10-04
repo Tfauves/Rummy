@@ -3,7 +3,7 @@ package com.company.deck;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StandardDeck {
+public class StandardDeck implements Deck{
     private final List<Card> cards = new ArrayList<>();
     public final String[] SUITS = {"♦", "♠", "♣", "♥"
     };
@@ -20,4 +20,17 @@ public class StandardDeck {
     }
 
 
+    @Override
+    public Card draw() {
+        return cards.remove(cards.size() - 1);
+    }
+
+    @Override
+    public void shuffle() {
+
+    }
+
+    public List<Card> getCards() {
+        return cards;
+    }
 }
