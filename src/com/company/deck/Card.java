@@ -1,6 +1,6 @@
 package com.company.deck;
 
-public class Card implements Deck{
+public class Card {
     private final String suit;
     private final int rank;
     private boolean isFaceDown = true;
@@ -31,11 +31,6 @@ public class Card implements Deck{
             default -> outPut = getRANK() == 10 ? Integer.toString(getRANK()) : " " + getRANK();
         };
         return outPut + " " + suit;
-    }
-
-    @Override
-    public Card draw() {
-        return null;
     }
 
     public void shuffle() {}
