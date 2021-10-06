@@ -19,7 +19,7 @@ public class Card {
     }
 
     public String display() {
-        String outPut = "";
+        String outPut;
 //        if (isFaceDown) {
 //            return "<*>";
 //        }
@@ -32,8 +32,6 @@ public class Card {
         };
         return outPut + " " + suit;
     }
-
-    public void shuffle() {}
 
     public void flip() {
         isFaceDown = !isFaceDown;
