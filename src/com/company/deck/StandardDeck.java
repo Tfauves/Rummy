@@ -1,6 +1,7 @@
 package com.company.deck;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class StandardDeck implements Deck{
@@ -27,7 +28,13 @@ public class StandardDeck implements Deck{
 
     @Override
     public void shuffle() {
+        Collections.shuffle(cards);
+    }
 
+    public Card flipDraw() {
+        Card card = draw();
+        card.flip();
+        return card;
     }
 
     public List<Card> getCards() {
