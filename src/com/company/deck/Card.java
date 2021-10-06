@@ -20,9 +20,9 @@ public class Card {
 
     public String display() {
         String outPut = "";
-        if (isFaceDown) {
-            return "<*>";
-        }
+//        if (isFaceDown) {
+//            return "<*>";
+//        }
         switch (getRANK()) {
             case 1 -> outPut = "ACE";
             case 11 -> outPut = "JACK";

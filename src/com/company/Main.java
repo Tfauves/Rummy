@@ -10,8 +10,15 @@ public class Main {
 	// write your code here
         Deck deck = new StandardDeck();
         deck.shuffle();
-        deck.draw().flip();
         System.out.println(deck.draw().display());
+        System.out.println(deck.draw().display());
+        System.out.println(deck.draw().display());
+        System.out.println(deck.draw().display());
+        System.out.println(deck.draw().display());
+        System.out.println(deck.draw().display());
+        System.out.println(deck.draw().display());
+        System.out.println(deck.draw().display());
+
 
 
     }
