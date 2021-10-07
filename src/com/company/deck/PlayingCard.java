@@ -7,6 +7,10 @@ public class PlayingCard extends Card {
 
     }
 
+    public String toString() {
+        return getRank() + " " + getSuit();
+    }
+
     @Override
     public String display() {
         String outPut;

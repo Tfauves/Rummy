@@ -14,7 +14,7 @@ public class StandardDeck implements Deck{
     public StandardDeck() {
         for (String suit : SUITS) {
             for (int value : VALUE) {
-                cards.add(new Card(suit, value));
+                cards.add(new PlayingCard(suit, value));
             }
 
         }
