@@ -11,9 +11,7 @@ public class Main {
         Deck deck = new StandardDeck();
         deck.shuffle();
         System.out.println(deck.draw().display());
-        System.out.println(deck.draw().display());
-        System.out.println(deck.draw().display());
-        System.out.println(deck.draw().display());
+
 
     }
 }
