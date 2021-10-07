@@ -18,24 +18,15 @@ public abstract class Card {
         return rank + " " + suit;
     }
 
-    public String display() {
-        String outPut;
-//        if (isFaceDown) {
-//            return "<*>";
-//        }
-        switch (rank) {
-            case 1 -> outPut = "ACE";
-            case 11 -> outPut = "JACK";
-            case 12 -> outPut = "QUEEN";
-            case 13 -> outPut = "KING";
-            default -> outPut = getRank() == 10 ? Integer.toString(getRank()) : " " + getRank();
-        };
-        return outPut + " " + suit;
-    }
+    public abstract String display();
 
     public void flip() {
         isFaceDown = !isFaceDown;
     }
 
     public boolean getIsFaceDown() {return isFaceDown;}
+
+    public String getSuit() {
+        return suit;
+    }
 }
