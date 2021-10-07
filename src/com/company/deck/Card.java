@@ -1,6 +1,6 @@
 package com.company.deck;
 
-public class Card {
+public abstract class Card {
     private final String suit;
     private final int rank;
     private boolean isFaceDown = true;
@@ -10,7 +10,7 @@ public class Card {
         this.rank = rank;
     }
 
-    public int getRANK() {
+    public int getRank() {
         return rank;
     }
 
@@ -23,12 +23,12 @@ public class Card {
 //        if (isFaceDown) {
 //            return "<*>";
 //        }
-        switch (getRANK()) {
+        switch (rank) {
             case 1 -> outPut = "ACE";
             case 11 -> outPut = "JACK";
             case 12 -> outPut = "QUEEN";
             case 13 -> outPut = "KING";
-            default -> outPut = getRANK() == 10 ? Integer.toString(getRANK()) : " " + getRANK();
+            default -> outPut = getRank() == 10 ? Integer.toString(getRank()) : " " + getRank();
         };
         return outPut + " " + suit;
     }

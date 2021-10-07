@@ -20,7 +20,6 @@ public class StandardDeck implements Deck{
         }
     }
 
-
     @Override
     public Card draw() {
         return cards.remove(cards.size() - 1);
