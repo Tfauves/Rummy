@@ -14,6 +14,18 @@ public class Player implements Actor {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getAction() {
+        return 0;
+    }
+
 
 
 
