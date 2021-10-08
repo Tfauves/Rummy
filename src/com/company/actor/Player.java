@@ -10,6 +10,11 @@ public class Player implements Actor {
         this.name = name;
         this.score = score;
     }
+    public Player(String name) {
+        this.name = name;
+    }
+
+
 
 
 }
