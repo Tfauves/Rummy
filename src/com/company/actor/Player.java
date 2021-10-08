@@ -6,4 +6,10 @@ public class Player implements Actor {
     private final String name;
     private int score;
 
+    public Player(String name, int score) {
+        this.name = name;
+        this.score = score;
+    }
+
+
 }
