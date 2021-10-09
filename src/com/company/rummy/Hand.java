@@ -1,25 +1,28 @@
 package com.company.rummy;
 
+import com.company.deck.Card;
 import com.company.deck.PlayingCard;
+import com.company.deck.StandardDeck;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Hand {
-    private List<PlayingCard> cards = new ArrayList<>();
+    private List<Card> cards = new ArrayList<>();
     private Actor player;
 
     public Hand(Actor player) {
         this.player = player;
     }
 
-    public void addCard(PlayingCard card) {
+    public void addCard(Card card) {
         cards.add(card);
     }
 
+
     public String displayHand() {
         StringBuilder outPut = new StringBuilder();
-        for (PlayingCard card : cards) {
+        for (Card card : cards) {
             outPut.append(card.display()).append(" ");
         }
         return outPut.toString().trim();
