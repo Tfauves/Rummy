@@ -17,6 +17,16 @@ public class Hand {
         cards.add(card);
     }
 
+    public String displayHand() {
+        StringBuilder outPut = new StringBuilder();
+        for (PlayingCard card : cards) {
+            outPut.append(card.display()).append(" ");
+        }
+        return outPut.toString().trim();
+    }
+
+
+
 
 
 }
