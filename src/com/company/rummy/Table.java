@@ -4,6 +4,7 @@ package com.company.rummy;
 import com.company.actor.Player;
 import com.company.deck.Deck;
 import com.company.deck.StandardDeck;
+import com.company.util.Console;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ public class Table {
     private int playerCount = 0;
 
     public Table() {
-//        playerCount = Console.getInt();
+        playerCount = Console.getInt("number of players", 1, 6, "invalid input");
         for (int count = 0; count < playerCount; count++) {
             Player newPlayer = new Player("Player" + count + 1 + ": ");
             hands.add(new Hand(newPlayer));
@@ -23,6 +24,7 @@ public class Table {
     }
 
     public void deal() {
+        deck.shuffle();
         for (int count = 0; count < 10; count++) {
             for (Hand player : hands) {
                 player.addCard(deck.draw());
@@ -33,7 +35,7 @@ public class Table {
     public void displayTable() {
         StringBuilder outPut = new StringBuilder();
         for (Hand player : hands) {
-            System.out.println(outPut.append(player.displayHand()));
+            outPut.append(player.displayHand()).append(" | \n");
         }
         System.out.println(outPut);
     }

@@ -18,10 +18,10 @@ public class PlayingCard extends Card {
 //            return "<*>";
 //        }
         switch (getRank()) {
-            case 1 -> outPut = "ACE";
-            case 11 -> outPut = "JACK";
-            case 12 -> outPut = "QUEEN";
-            case 13 -> outPut = "KING";
+            case 1 -> outPut = "AC";
+            case 11 -> outPut = "JK";
+            case 12 -> outPut = "QU";
+            case 13 -> outPut = "KI";
             default -> outPut = getRank() == 10 ? Integer.toString(getRank()) : " " + getRank();
         };
         return outPut + " " + getSuit();
