@@ -16,8 +16,9 @@ public class Main {
 //        myHand.addCard(rumDeck.draw());
 //        System.out.println(myHand.displayHand());
         Table rummy = new Table();
-        rummy.deal();
-        rummy.displayTable();
+//        rummy.deal();
+//        rummy.displayTable();
+        rummy.playGame();
 
     }
 }

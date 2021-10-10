@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Table {
     private List<Hand> hands = new ArrayList<>();
-    private Deck deck = new StandardDeck();
+    private Deck deck;
     private List<Card> discardPile = new ArrayList<>();
     private int playerCount = 0;
 
@@ -26,8 +26,20 @@ public class Table {
         }
     }
 
-    public void deal() {
+    public void playGame() {
+        playARound();
+    }
+
+    public void playARound() {
+        deck = new StandardDeck();
         deck.shuffle();
+        deal();
+        displayTable();
+        playerTurn();
+        displayTable();
+    }
+
+    public void deal() {
         for (int count = 0; count < 10; count++) {
             for (Hand player : hands) {
                 player.addCard(deck.draw());
