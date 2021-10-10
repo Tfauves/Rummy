@@ -6,10 +6,10 @@ import java.util.List;
 
 public class Hand {
     private List<Card> cards = new ArrayList<>();
-    private Actor player;
+    private Actor holder;
 
     public Hand(Actor player) {
-        this.player = player;
+        this.holder = player;
     }
 
     public void addCard(Card card) {
@@ -29,11 +29,11 @@ public class Hand {
     }
 
     public String getName() {
-        return player.getName();
+        return holder.getName();
     }
 
     public int getAction() {
-        return player.getAction(this);
+        return holder.getAction(this);
     }
 
     public int getValue() {

@@ -45,6 +45,18 @@ public class Table {
         System.out.println(outPut);
     }
 
+    private void playerTurn() {
+        for (int count = 0; count < hands.size(); count++) {
+            Hand player = hands.get(count);
+            player.displayHand();
+            while (true) {
+                if (!turn(player)) break;
+            }
+            System.out.println(player.displayHand());
+            Console.getString("Enter to start next turn", false);
+        }
+    }
+
     private boolean turn(Hand activeHand) {
         System.out.println(discardPile.get(0));
         System.out.println(activeHand.getName());
