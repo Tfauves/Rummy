@@ -14,7 +14,7 @@ import java.util.List;
 public class Table {
     private List<Hand> hands = new ArrayList<>();
     private Deck deck = new StandardDeck();
-    private List<Card> discard = new ArrayList<>();
+    private List<Card> discardPile = new ArrayList<>();
     private int playerCount = 0;
 
     public Table() {
@@ -33,7 +33,7 @@ public class Table {
                 player.addCard(deck.draw());
             }
         }
-        discard.add(deck.draw());
+        discardPile.add(deck.draw());
     }
 
     public void displayTable() {
@@ -41,13 +41,29 @@ public class Table {
         for (Hand player : hands) {
             outPut.append(player.getName()).append(" ").append( player.displayHand()).append(" | \n");
         }
-        System.out.println(discard.get(0));
+        System.out.println(discardPile.get(0));
         System.out.println(outPut);
     }
 
     private boolean turn(Hand activeHand) {
-        System.out.println(discard.get(0));
+        System.out.println(discardPile.get(0));
         System.out.println(activeHand.getName());
-        int action = activeHand.
+        int action = activeHand.getAction();
+        return switch (action) {
+            case Actor.DRAW -> draw(activeHand);
+            case Actor.DISCARD -> discard();
+            default -> false;
+        }
     }
+
+    private boolean draw(Hand activeHand) {
+        activeHand.addCard(deck.draw());
+        return true;
+    }
+
+    private boolean discard(Hand activeHand) {
+        activeHand.
+    }
+
+
 }

@@ -16,6 +16,8 @@ public class Hand {
         cards.add(card);
     }
 
+    public
+
     public String displayHand() {
         StringBuilder outPut = new StringBuilder();
         for (Card card : cards) {
