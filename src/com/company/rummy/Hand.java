@@ -16,7 +16,9 @@ public class Hand {
         cards.add(card);
     }
 
-    public
+    public void removeCard() {
+
+    }
 
     public String displayHand() {
         StringBuilder outPut = new StringBuilder();
@@ -31,7 +33,7 @@ public class Hand {
     }
 
     public int getAction() {
-        return player.getAction(this)
+        return player.getAction(this);
     }
 
     public int getValue() {

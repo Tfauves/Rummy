@@ -51,9 +51,9 @@ public class Table {
         int action = activeHand.getAction();
         return switch (action) {
             case Actor.DRAW -> draw(activeHand);
-            case Actor.DISCARD -> discard();
+//            case Actor.DISCARD -> discard();
             default -> false;
-        }
+        };
     }
 
     private boolean draw(Hand activeHand) {
@@ -62,7 +62,7 @@ public class Table {
     }
 
     private boolean discard(Hand activeHand) {
-        activeHand.
+        return true;
     }
 
 

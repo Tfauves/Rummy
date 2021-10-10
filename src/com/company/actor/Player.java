@@ -25,18 +25,25 @@ public class Player implements Actor {
         return score;
     }
 
-    public String getActions(Hand hand) {
+    @Override
+    public int getAction(Hand hand) {
+        System.out.println(hand.displayHand());
+        System.out.println(hand.getValue());
+        return Console.getInt(getAvailableActions(hand), 1, 2, "invalid action");
+    }
+
+    public String getAvailableActions(Hand hand) {
 //        actionsCount = 2;
         StringBuilder outPut = new StringBuilder();
         outPut.append("1. Draw from deck\n 2. Pick up discarded card");
         return outPut.toString();
     }
 
-    public int getAction(Hand hand) {
-        System.out.println(hand.displayHand());
-        System.out.println(hand.getValue());
-        return Console.getInt(getActions(hand),1, 2, "invalid input");
-    }
+//    public int getAction(Hand hand) {
+//        System.out.println(hand.displayHand());
+//        System.out.println(hand.getValue());
+//        return Console.getInt(getActions(hand),1, 2, "invalid input");
+//    }
 
 
 

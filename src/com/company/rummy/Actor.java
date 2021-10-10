@@ -6,5 +6,5 @@ public interface Actor {
 
     String getName();
     int getScore();
-    int getAction();
+    int getAction(Hand hand);
 }
