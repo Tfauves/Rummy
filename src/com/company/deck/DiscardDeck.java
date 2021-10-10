@@ -1,4 +1,13 @@
 package com.company.deck;
 
-public class DiscardDeck {
+public class DiscardDeck implements Deck {
+    @Override
+    public Card draw() {
+        return null;
+    }
+
+    @Override
+    public void shuffle() {
+
+    }
 }
