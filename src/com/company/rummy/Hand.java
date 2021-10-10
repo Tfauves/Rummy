@@ -1,7 +1,6 @@
 package com.company.rummy;
 
 import com.company.deck.Card;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +23,11 @@ public class Hand {
         }
         return outPut.toString().trim();
     }
+
+    public String getName() {
+        return player.getName();
+    }
+
 
 
 

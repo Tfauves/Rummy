@@ -35,7 +35,7 @@ public class Table {
     public void displayTable() {
         StringBuilder outPut = new StringBuilder();
         for (Hand player : hands) {
-            outPut.append(player.displayHand()).append(" | \n");
+            outPut.append(player.getName()).append(" ").append( player.displayHand()).append(" | \n");
         }
         System.out.println(outPut);
     }

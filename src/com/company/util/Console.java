@@ -22,4 +22,18 @@ public class Console {
         return option;
     }
 
+    public static String getString(String prompt, boolean isRequired) {
+        String input;
+        do {
+            System.out.println(prompt);
+            input = scanner.nextLine();
+            if (isRequired && input.length() == 0) {
+                System.out.println("required input");
+                continue;
+            }
+            break;
+        } while (true);
+        return input;
+    }
+
 }
