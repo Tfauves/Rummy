@@ -4,6 +4,7 @@ package com.company.rummy;
 import com.company.actor.Player;
 import com.company.deck.Card;
 import com.company.deck.Deck;
+import com.company.deck.DiscardDeck;
 import com.company.deck.StandardDeck;
 import com.company.util.Console;
 
@@ -13,6 +14,7 @@ import java.util.List;
 public class Table {
     private List<Hand> hands = new ArrayList<>();
     private Deck deck = new StandardDeck();
+    private List<Card> discard = new ArrayList<>();
     private int playerCount = 0;
 
     public Table() {
@@ -31,6 +33,7 @@ public class Table {
                 player.addCard(deck.draw());
             }
         }
+        discard.add(deck.draw());
     }
 
     public void displayTable() {
@@ -38,6 +41,7 @@ public class Table {
         for (Hand player : hands) {
             outPut.append(player.getName()).append(" ").append( player.displayHand()).append(" | \n");
         }
+        System.out.println(discard.get(0));
         System.out.println(outPut);
     }
 }

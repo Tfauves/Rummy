@@ -22,3 +22,4 @@ public class DiscardDeck implements Deck {
         return discardedCards;
     }
 }
+// TODO: 10/9/2021 make discard deck like the dealer in black jack??? treat it like another hand?????
