@@ -32,6 +32,21 @@ public class Hand {
         return player.getAction(this)
     }
 
+    public int getValue() {
+        int score = 0;
+        for (Card card : cards) {
+            int value = card.getRank();
+            switch (value) {
+                case 1 -> {
+                    value = 1;
+                    score += value;
+                }
+                case 11, 12, 13 -> score += 10;
+                default -> score += value;
+            }
+        }
+        return score;
+    }
 
 
 
