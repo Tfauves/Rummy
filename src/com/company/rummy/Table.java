@@ -44,4 +44,10 @@ public class Table {
         System.out.println(discard.get(0));
         System.out.println(outPut);
     }
+
+    private boolean turn(Hand activeHand) {
+        System.out.println(discard.get(0));
+        System.out.println(activeHand.getName());
+        int action = activeHand.
+    }
 }

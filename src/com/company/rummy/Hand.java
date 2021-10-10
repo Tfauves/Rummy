@@ -28,6 +28,10 @@ public class Hand {
         return player.getName();
     }
 
+    public int getAction() {
+        return player.getAction(this)
+    }
+
 
 
 

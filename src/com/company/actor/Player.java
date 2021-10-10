@@ -1,6 +1,9 @@
 package com.company.actor;
 
 import com.company.rummy.Actor;
+import com.company.rummy.Hand;
+import com.company.util.Console;
+
 
 public class Player implements Actor {
     private final String name;
@@ -22,8 +25,17 @@ public class Player implements Actor {
         return score;
     }
 
-    public int getAction() {
-        return 0;
+    public String getActions(Hand hand) {
+//        actionsCount = 2;
+        StringBuilder outPut = new StringBuilder();
+        outPut.append("1. Draw from deck\n 2. Pick up discarded card");
+        return outPut.toString();
+    }
+
+    public int getAction(Hand hand) {
+        System.out.println(hand.displayHand());
+        System.out.println(hand.getValue());
+        return Console.getInt(getActions(hand),1, 2, "invalid input");
     }
 
 
