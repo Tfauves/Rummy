@@ -36,6 +36,7 @@ public class Table {
         deal();
 //        displayTable();
         playerTurn();
+
         displayTable();
     }
 
@@ -65,6 +66,7 @@ public class Table {
                 if (!turn(player)) break;
             }
             System.out.println(player.displayHand());
+
             Console.getString("Enter to start next turn", false);
         }
     }
@@ -75,7 +77,8 @@ public class Table {
         int action = activeHand.getAction();
         return switch (action) {
             case Actor.DRAW -> draw(activeHand);
-            case Actor.DISCARD -> drawDiscardedCard(activeHand);
+            case Actor.DISCARD_DRAW -> drawDiscardedCard(activeHand);
+            case Actor.DISCARD_CARD -> discard(activeHand);
             default -> false;
         };
     }
@@ -90,7 +93,18 @@ public class Table {
         return false;
     }
 
+    // TODO: 10/10/2021 this method for card discard to end turn. 
+
     private boolean discard(Hand activeHand) {
+        for (int card = 0; card < activeHand.getCards().size(); card++) {
+            System.out.println(card);
+            discardPile.add(activeHand.getCards().get(card));
+        }
+//            int faceValue = Console.getInt("enter card rank 1-13", 1, 13, "invalid entry");
+//            int suit = Console.getInt("1. \u2664 | 2. \u2665 | 3. \u2666 | 4. \u2667", 1, 4, "Invalid entry");
+//
+//
+//            return new Card(SUITS[suit - 1], faceValue);
         return true;
     }
 
