@@ -2,10 +2,7 @@ package com.company.rummy;
 
 
 import com.company.actor.Player;
-import com.company.deck.Card;
-import com.company.deck.Deck;
-import com.company.deck.DiscardDeck;
-import com.company.deck.StandardDeck;
+import com.company.deck.*;
 import com.company.util.Console;
 
 import java.util.ArrayList;
@@ -65,7 +62,8 @@ public class Table {
             while (true) {
                 if (!turn(player)) break;
             }
-            System.out.println(player.displayHand());
+//            System.out.println(player.displayHand());
+
 
             Console.getString("Enter to start next turn", false);
         }
@@ -78,14 +76,14 @@ public class Table {
         return switch (action) {
             case Actor.DRAW -> draw(activeHand);
             case Actor.DISCARD_DRAW -> drawDiscardedCard(activeHand);
-            case Actor.DISCARD_CARD -> discard(activeHand);
             default -> false;
         };
+
     }
 
     private boolean draw(Hand activeHand) {
         activeHand.addCard(deck.draw());
-        return false;
+        return true;
     }
 
     private boolean drawDiscardedCard(Hand activeHand) {
@@ -96,16 +94,21 @@ public class Table {
     // TODO: 10/10/2021 this method for card discard to end turn. 
 
     private boolean discard(Hand activeHand) {
-        for (int card = 0; card < activeHand.getCards().size(); card++) {
-            System.out.println(card);
-            discardPile.add(activeHand.getCards().get(card));
+        int faceValue = Console.getInt("to discard a card enter card rank 1-13", 1, 13, "invalid entry");
+        int suit = Console.getInt("1. \u2664 | 2. \u2665 | 3. \u2666 | 4. \u2667", 1, 4, "Invalid entry");
+        int cardIndex = 0;
+        for (int i = 0; i < activeHand.getCards().size(); i++) {
+            System.out.println(activeHand.getCards().get(i) + " " + cardIndex);
+            activeHand.discard();
+
         }
-//            int faceValue = Console.getInt("enter card rank 1-13", 1, 13, "invalid entry");
-//            int suit = Console.getInt("1. \u2664 | 2. \u2665 | 3. \u2666 | 4. \u2667", 1, 4, "Invalid entry");
-//
-//
-//            return new Card(SUITS[suit - 1], faceValue);
+
         return true;
+    }
+
+    private void endTurn() {
+
+
     }
 
 
