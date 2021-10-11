@@ -75,13 +75,18 @@ public class Table {
         int action = activeHand.getAction();
         return switch (action) {
             case Actor.DRAW -> draw(activeHand);
-//            case Actor.DISCARD -> discard();
+            case Actor.DISCARD -> drawDiscardedCard(activeHand);
             default -> false;
         };
     }
 
     private boolean draw(Hand activeHand) {
         activeHand.addCard(deck.draw());
+        return false;
+    }
+
+    private boolean drawDiscardedCard(Hand activeHand) {
+        activeHand.addCard(discardPile.get(0));
         return false;
     }
 
