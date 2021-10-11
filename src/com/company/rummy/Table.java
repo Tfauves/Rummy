@@ -17,7 +17,7 @@ public class Table {
     public Table() {
         playerCount = Console.getInt("number of players", 1, 6, "invalid input");
         for (int count = 0; count < playerCount; count++) {
-            Player newPlayer = new Player("Player" + count + 1 + ": ");
+            Player newPlayer = new Player("Player" + (count + 1) + ": ");
             hands.add(new Hand(newPlayer));
 
         }
@@ -62,7 +62,7 @@ public class Table {
             while (true) {
                 if (!turn(player)) break;
             }
-//            System.out.println(player.displayHand());
+            System.out.println(player.displayHand());
 
 
             Console.getString("Enter to start next turn", false);
@@ -83,7 +83,7 @@ public class Table {
 
     private boolean draw(Hand activeHand) {
         activeHand.addCard(deck.draw());
-        return true;
+        return false;
     }
 
     private boolean drawDiscardedCard(Hand activeHand) {
@@ -102,8 +102,7 @@ public class Table {
             activeHand.discard();
 
         }
-
-        return true;
+        return false;
     }
 
     private void endTurn() {
