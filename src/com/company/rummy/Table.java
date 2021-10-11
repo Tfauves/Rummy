@@ -34,7 +34,7 @@ public class Table {
         deck = new StandardDeck();
         deck.shuffle();
         deal();
-        displayTable();
+//        displayTable();
         playerTurn();
         displayTable();
     }
@@ -82,7 +82,7 @@ public class Table {
 
     private boolean draw(Hand activeHand) {
         activeHand.addCard(deck.draw());
-        return true;
+        return false;
     }
 
     private boolean discard(Hand activeHand) {
