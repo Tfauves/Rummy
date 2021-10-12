@@ -13,6 +13,7 @@ public class Table {
     private Deck deck;
     private List<Card> discardPile = new ArrayList<>();
     private int playerCount = 0;
+    private boolean hasWinner = false;
 
     public Table() {
         playerCount = Console.getInt("number of players", 1, 6, "invalid input");
@@ -24,16 +25,17 @@ public class Table {
     }
 
     public void playGame() {
+        deck = new StandardDeck();
+        deck.shuffle();
+        deal();
         playARound();
     }
 
     public void playARound() {
-        deck = new StandardDeck();
-        deck.shuffle();
-        deal();
-//        displayTable();
-        playerTurn();
-        displayTable();
+        while(!hasWinner) {
+            playerTurn();
+            displayTable();
+        }
     }
 
     public void deal() {
