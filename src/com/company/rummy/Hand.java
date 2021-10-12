@@ -18,17 +18,8 @@ public class Hand {
         cards.add(card);
     }
 
-    public void removeCard() {
+    public void discardCard() {
 
-    }
-
-    public void discard() {
-        int faceValue = Console.getInt("to discard a card enter card rank 1-13", 1, 13, "invalid entry");
-        int suit = Console.getInt("1. \u2664 | 2. \u2665 | 3. \u2666 | 4. \u2667", 1, 4, "Invalid entry");
-        int cardIndex = 0;
-        for (int i = 0; i < cards.size(); i++) {
-            System.out.println(cards.get(i) + " " + cardIndex);
-        }
     }
 
     public String displayHand() {
