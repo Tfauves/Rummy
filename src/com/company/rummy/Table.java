@@ -62,14 +62,13 @@ public class Table {
                 if (!turn(player)) break;
             }
             System.out.println(player.displayHand());
-//            throwAwayCard(player);
             discardPile.add(player.getCards().remove(Console.getInt("Enter a card to remove", 1, 11, "invalid selection")));
             Console.getString("Enter to start next turn", false);
         }
     }
 
     private boolean turn(Hand activeHand) {
-        System.out.println(discardPile.get(discardPile.size() -1));
+        System.out.println(discardPile.get(discardPile.size() -1).display());
         System.out.println(activeHand.getName());
         int action = activeHand.getAction();
         return switch (action) {
@@ -85,7 +84,8 @@ public class Table {
     }
 
     private boolean drawDiscardedCard(Hand activeHand) {
-        activeHand.addCard(discardPile.get(0));
+        activeHand.addCard(discardPile.get(discardPile.size() - 1));
+
         return false;
     }
 
