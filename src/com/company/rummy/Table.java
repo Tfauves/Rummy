@@ -62,6 +62,8 @@ public class Table {
                 if (!turn(player)) break;
             }
             System.out.println(player.displayHand());
+//            throwAwayCard(player);
+            discardPile.add(player.getCards().remove(Console.getInt("Enter a card to remove", 1, 11, "invalid selection")));
 
             Console.getString("Enter to start next turn", false);
         }
@@ -74,14 +76,13 @@ public class Table {
         return switch (action) {
             case Actor.DRAW -> draw(activeHand);
             case Actor.DISCARD_DRAW -> drawDiscardedCard(activeHand);
-            case Actor.DISCARD_CARD -> throwAwayCard(activeHand);
             default -> false;
         };
     }
 
     private boolean draw(Hand activeHand) {
         activeHand.addCard(deck.draw());
-        return true;
+        return false;
     }
 
     private boolean drawDiscardedCard(Hand activeHand) {
@@ -89,14 +90,8 @@ public class Table {
         return false;
     }
 
-    private boolean throwAwayCard(Hand activeHand) {
-        StringBuilder discardCard = new StringBuilder();
-        for (int i = 0; i < activeHand.getCards().size() + 1; i++) {
-            discardCard.append(i < 10 ? i + " " : i);
-        }
-        System.out.println(discardCard);
+    private void throwAwayCard(Hand activeHand) {
         discardPile.add(activeHand.removeCard(Console.getInt("Enter a card to remove", 1, 11, "invalid selection")));
-        return false;
 
     }
 
