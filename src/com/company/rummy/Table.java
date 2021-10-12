@@ -64,13 +64,12 @@ public class Table {
             System.out.println(player.displayHand());
 //            throwAwayCard(player);
             discardPile.add(player.getCards().remove(Console.getInt("Enter a card to remove", 1, 11, "invalid selection")));
-
             Console.getString("Enter to start next turn", false);
         }
     }
 
     private boolean turn(Hand activeHand) {
-        System.out.println(discardPile.get(0));
+        System.out.println(discardPile.get(discardPile.size() -1));
         System.out.println(activeHand.getName());
         int action = activeHand.getAction();
         return switch (action) {
