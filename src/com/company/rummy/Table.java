@@ -74,18 +74,30 @@ public class Table {
         return switch (action) {
             case Actor.DRAW -> draw(activeHand);
             case Actor.DISCARD_DRAW -> drawDiscardedCard(activeHand);
+            case Actor.DISCARD_CARD -> throwAwayCard(activeHand);
             default -> false;
         };
     }
 
     private boolean draw(Hand activeHand) {
         activeHand.addCard(deck.draw());
-        return false;
+        return true;
     }
 
     private boolean drawDiscardedCard(Hand activeHand) {
         activeHand.addCard(discardPile.get(0));
         return false;
+    }
+
+    private boolean throwAwayCard(Hand activeHand) {
+        StringBuilder discardCard = new StringBuilder();
+        for (int i = 0; i < activeHand.getCards().size() + 1; i++) {
+            discardCard.append(i < 10 ? i + " " : i);
+        }
+        System.out.println(discardCard);
+        discardPile.add(activeHand.removeCard(Console.getInt("Enter a card to remove", 1, 11, "invalid selection")));
+        return false;
+
     }
 
 

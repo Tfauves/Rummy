@@ -35,7 +35,7 @@ public class Player implements Actor {
     public String getAvailableActions(Hand hand) {
 //        actionsCount = 2;
         StringBuilder outPut = new StringBuilder();
-        outPut.append("1. Draw from deck\n2. Pick up discarded card");
+        outPut.append("1. Draw from deck\n2. Pick up discarded card\n3. Discard card");
         return outPut.toString();
     }
 

@@ -1,9 +1,11 @@
 package com.company.rummy;
 
 import com.company.deck.Card;
+import com.company.deck.PlayingCard;
 import com.company.util.Console;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Hand {
@@ -18,8 +20,8 @@ public class Hand {
         cards.add(card);
     }
 
-    public void discardCard() {
-
+    public Card removeCard(int index) {
+        return cards.remove(index);
     }
 
     public String displayHand() {
