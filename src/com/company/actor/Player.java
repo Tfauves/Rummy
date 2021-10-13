@@ -30,7 +30,7 @@ public class Player implements Actor {
     public int getAction(Hand hand) {
         System.out.println(hand.displayHand());
 //        System.out.println(hand.getValue());
-        return Console.getInt(getAvailableActions(hand), 1, 2, "invalid action");
+        return Console.getInt(getAvailableActions(hand), 1, 4, "invalid action");
     }
 
     public String getAvailableActions(Hand hand) {

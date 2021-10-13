@@ -104,12 +104,9 @@ public class Table {
     }
 
     private boolean knock(Hand activeHand) {
-        hasKnocked = true;
-        System.out.println(activeHand.getName() + " has knocked!");
-        displayTable();
-        for (Hand hand : hands) {
 
-        }
+        System.out.println(" has knocked!");
+
         return false;
     }
 
