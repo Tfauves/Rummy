@@ -52,7 +52,6 @@ public class Table {
         for (Hand player : hands) {
             outPut.append(player.getName()).append(" ").append( player.displayHand()).append(" | \n");
         }
-//        System.out.println(discardPile.get(0));
         System.out.println(outPut);
     }
 
@@ -64,7 +63,10 @@ public class Table {
                 if (!turn(player)) break;
             }
             System.out.println(player.displayHand());
-            discardPile.add(player.getCards().remove(Console.getInt("Enter a card to remove", 1, 11, "invalid selection")));
+            for (int i = 1; i < player.getCards().size() + 1; i++) {
+                System.out.print(i + "    ");
+            }
+            discardPile.add(player.getCards().remove(Console.getInt("\nEnter number to discard", 1, 11, "invalid selection")));
             Console.getString("Enter to start next turn", false);
         }
     }
