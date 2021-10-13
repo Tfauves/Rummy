@@ -66,7 +66,8 @@ public class Table {
             for (int i = 1; i < player.getCards().size() + 1; i++) {
                 System.out.print(i + "    ");
             }
-            discardPile.add(player.getCards().remove(Console.getInt("\nEnter number to discard", 1, 11, "invalid selection")));
+            int index = Console.getInt("\nEnter number to discard", 0, 11, "invalid selection");
+            discardPile.add(player.getCards().remove(index -1));
             Console.getString("Enter to start next turn", false);
         }
     }
