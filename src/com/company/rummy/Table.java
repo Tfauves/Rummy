@@ -99,7 +99,6 @@ public class Table {
     }
 
     private boolean sortHand(Hand activeHand) {
-
         return true;
     }
 
