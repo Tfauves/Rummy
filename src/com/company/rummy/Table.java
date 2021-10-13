@@ -6,6 +6,7 @@ import com.company.deck.*;
 import com.company.util.Console;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Table {
@@ -13,10 +14,10 @@ public class Table {
     private Deck deck;
     private List<Card> discardPile = new ArrayList<>();
     private int playerCount = 0;
-    private boolean isActiveRound = false;
+    private boolean hasKnocked = false;
 
     public Table() {
-        playerCount = Console.getInt("number of players", 1, 6, "invalid input");
+        playerCount = Console.getInt("number of players", 1, 3, "invalid input");
         for (int count = 0; count < playerCount; count++) {
             Player newPlayer = new Player("Player" + (count + 1) + ": ");
             hands.add(new Hand(newPlayer));
@@ -32,7 +33,7 @@ public class Table {
     }
 
     public void playARound() {
-        while(!isActiveRound) {
+        while(!hasKnocked) {
             playerTurn();
 //            displayTable();
         }
@@ -79,6 +80,7 @@ public class Table {
         return switch (action) {
             case Actor.DRAW -> draw(activeHand);
             case Actor.DISCARD_DRAW -> drawDiscardedCard(activeHand);
+            case Actor.SORT -> sortHand(activeHand);
             default -> false;
         };
     }
@@ -94,6 +96,11 @@ public class Table {
         activeHand.addCard(discardPile.get(discardPile.size() - 1));
 
         return false;
+    }
+
+    private boolean sortHand(Hand activeHand) {
+
+        return true;
     }
 
 

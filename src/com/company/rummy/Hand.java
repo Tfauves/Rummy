@@ -56,6 +56,10 @@ public class Hand {
         return score;
     }
 
+    public void sortCards() {
+
+    }
+
 
     public List<Card> getCards() {
         return cards;
