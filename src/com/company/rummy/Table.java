@@ -81,6 +81,7 @@ public class Table {
             case Actor.DRAW -> draw(activeHand);
             case Actor.DISCARD_DRAW -> drawDiscardedCard(activeHand);
             case Actor.SORT -> sortHand(activeHand);
+            case Actor.KNOCK -> knock(activeHand);
             default -> false;
         };
     }
@@ -100,6 +101,16 @@ public class Table {
 
     private boolean sortHand(Hand activeHand) {
         return true;
+    }
+
+    private boolean knock(Hand activeHand) {
+        hasKnocked = true;
+        System.out.println(activeHand.getName() + " has knocked!");
+        displayTable();
+        for (Hand hand : hands) {
+
+        }
+        return false;
     }
 
 
