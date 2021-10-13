@@ -13,6 +13,7 @@ public class Player implements Actor {
         this.name = name;
         this.score = score;
     }
+
     public Player(String name) {
         this.name = name;
     }
@@ -38,14 +39,6 @@ public class Player implements Actor {
         outPut.append("1. Draw from deck\n2. Pick up discarded card");
         return outPut.toString();
     }
-
-//    public int getAction(Hand hand) {
-//        System.out.println(hand.displayHand());
-//        System.out.println(hand.getValue());
-//        return Console.getInt(getActions(hand),1, 2, "invalid input");
-//    }
-
-
 
 
 }

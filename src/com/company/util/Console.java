@@ -33,6 +33,7 @@ public class Console {
             }
             break;
         } while (true);
+
         return input;
     }
 

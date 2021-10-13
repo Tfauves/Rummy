@@ -13,7 +13,7 @@ public class Table {
     private Deck deck;
     private List<Card> discardPile = new ArrayList<>();
     private int playerCount = 0;
-    private boolean hasWinner = false;
+    private boolean isActiveRound = false;
 
     public Table() {
         playerCount = Console.getInt("number of players", 1, 6, "invalid input");
@@ -32,9 +32,9 @@ public class Table {
     }
 
     public void playARound() {
-        while(!hasWinner) {
+        while(!isActiveRound) {
             playerTurn();
-            displayTable();
+//            displayTable();
         }
     }
 
@@ -84,7 +84,9 @@ public class Table {
     }
 
     private boolean draw(Hand activeHand) {
-        activeHand.addCard(deck.draw());
+        Card newCard = deck.draw();
+        System.out.println("You drew a  " + newCard);
+        activeHand.addCard(newCard);
         return false;
     }
 
@@ -92,11 +94,6 @@ public class Table {
         activeHand.addCard(discardPile.get(discardPile.size() - 1));
 
         return false;
-    }
-
-    private void throwAwayCard(Hand activeHand) {
-        discardPile.add(activeHand.removeCard(Console.getInt("Enter a card to remove", 1, 11, "invalid selection")));
-
     }
 
 
