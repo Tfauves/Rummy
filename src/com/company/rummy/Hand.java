@@ -3,6 +3,7 @@ package com.company.rummy;
 import com.company.deck.Card;
 import com.company.deck.PlayingCard;
 import com.company.util.Console;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +23,23 @@ public class Hand {
 
     public Card removeCard(int index) {
         return cards.remove(index);
+    }
+
+    public int sumHand() {
+        int score = 0;
+        for (Card card : cards) {
+          int value = card.getRank();
+          switch (value) {
+            case 1 -> {
+                value = 1;
+                score += value;
+            }
+            case 11, 12, 13 -> score += 10;
+            default -> score += value;
+          };
+       }
+
+       return score;
     }
 
     public String displayHand() {

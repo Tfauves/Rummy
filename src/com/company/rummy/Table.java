@@ -104,8 +104,11 @@ public class Table {
     }
 
     private boolean knock(Hand activeHand) {
+        hasKnocked = true;
+        System.out.println(activeHand.sumHand());
 
-        System.out.println(" has knocked!");
+        System.out.println(activeHand.getName() + "has knocked!");
+
 
         return false;
     }
