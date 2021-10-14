@@ -14,7 +14,7 @@ public class Table {
     private Deck deck;
     private List<Card> discardPile = new ArrayList<>();
     private int playerCount = 0;
-    private boolean hasKnocked = false;
+    private boolean activeRound = false;
 
     public Table() {
         playerCount = Console.getInt("number of players", 1, 3, "invalid input");
@@ -33,10 +33,12 @@ public class Table {
     }
 
     public void playARound() {
-        while(!hasKnocked) {
+        activeRound = true;
+        //while(activeRound) {
             playerTurn();
 //            displayTable();
-        }
+        //}
+
     }
 
     public void deal() {
@@ -57,19 +59,21 @@ public class Table {
     }
 
     private void playerTurn() {
-        for (int count = 0; count < hands.size(); count++) {
-            Hand player = hands.get(count);
-            player.displayHand();
-            while (true) {
-                if (!turn(player)) break;
+        while(activeRound) {
+            for (int count = 0; count < hands.size(); count++) {
+                Hand player = hands.get(count);
+                player.displayHand();
+                while (true) {
+                    if (!turn(player)) break;
+                }
+                System.out.println(player.displayHand());
+                for (int i = 1; i < player.getCards().size() + 1; i++) {
+                    System.out.print(i + "    ");
+                }
+                int index = Console.getInt("\nEnter number to discard", 0, 11, "invalid selection");
+                discardPile.add(player.getCards().remove(index - 1));
+                Console.getString("Enter to start next turn", false);
             }
-            System.out.println(player.displayHand());
-            for (int i = 1; i < player.getCards().size() + 1; i++) {
-                System.out.print(i + "    ");
-            }
-            int index = Console.getInt("\nEnter number to discard", 0, 11, "invalid selection");
-            discardPile.add(player.getCards().remove(index -1));
-            Console.getString("Enter to start next turn", false);
         }
     }
 
@@ -95,7 +99,6 @@ public class Table {
 
     private boolean drawDiscardedCard(Hand activeHand) {
         activeHand.addCard(discardPile.get(discardPile.size() - 1));
-
         return false;
     }
 
@@ -104,14 +107,17 @@ public class Table {
     }
 
     private boolean knock(Hand activeHand) {
-        hasKnocked = true;
+        activeRound = false;
         System.out.println(activeHand.sumHand());
-
         System.out.println(activeHand.getName() + "has knocked!");
-
-
         return false;
     }
+
+    private void endRound() {
+
+    }
+
+
 
 
 
