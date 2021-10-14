@@ -39,7 +39,7 @@ public class Hand {
     }
 
     public void playerPoints() {
-        holder.setPoints();
+
     }
 
     public String displayHand() {

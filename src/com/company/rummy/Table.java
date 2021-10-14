@@ -32,11 +32,7 @@ public class Table {
 
     public void playARound() {
         activeRound = true;
-        //while(activeRound) {
             playerTurn();
-//            displayTable();
-        //}
-
     }
 
     public void deal() {
@@ -114,13 +110,6 @@ public class Table {
     private void endRound() {
 
     }
-
-    private void determineWinner(Hand player) {
-
-
-    }
-
-
 
 
 

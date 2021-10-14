@@ -26,6 +26,7 @@ public class Player implements Actor {
         return points;
     }
 
+
     @Override
     public int getAction(Hand hand) {
         System.out.println(hand.displayHand());

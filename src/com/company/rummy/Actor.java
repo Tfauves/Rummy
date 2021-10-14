@@ -8,6 +8,6 @@ public interface Actor {
 
     String getName();
     int getPoints();
-    void setPoints();
+    void setPoints(int points);
     int getAction(Hand hand);
 }
