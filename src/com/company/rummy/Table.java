@@ -32,7 +32,9 @@ public class Table {
 
     public void playARound() {
         activeRound = true;
+       // while (activeRound) {
             playerTurn();
+        //}
     }
 
     public void deal() {
@@ -53,12 +55,16 @@ public class Table {
     }
 
     private void playerTurn() {
-        while(activeRound) {
             for (int count = 0; count < hands.size(); count++) {
                 Hand player = hands.get(count);
                 player.displayHand();
                 while (true) {
                     if (!turn(player)) break;
+                    if (!activeRound) {
+                        System.out.println("would you like to play again? y/n");
+                        System.exit(200);
+                    }
+
                 }
                 System.out.println(player.displayHand());
                 for (int i = 1; i < player.getCards().size() + 1; i++) {
@@ -68,25 +74,27 @@ public class Table {
                 discardPile.add(player.getCards().remove(index - 1));
                 Console.getString("Enter to start next turn", false);
             }
-        }
     }
 
     private boolean turn(Hand activeHand) {
-        System.out.println(discardPile.get(discardPile.size() -1).display());
-        System.out.println(activeHand.getName());
-        int action = activeHand.getAction();
-        return switch (action) {
-            case Actor.DRAW -> draw(activeHand);
-            case Actor.DISCARD_DRAW -> drawDiscardedCard(activeHand);
-            case Actor.SORT -> sortHand(activeHand);
-            case Actor.KNOCK -> knock(activeHand);
-            default -> false;
-        };
+        while (activeRound) {
+            System.out.println(discardPile.get(discardPile.size() - 1).display());
+            System.out.println(activeHand.getName());
+            int action = activeHand.getAction();
+            return switch (action) {
+                case Actor.DRAW -> draw(activeHand);
+                case Actor.DISCARD_DRAW -> drawDiscardedCard(activeHand);
+                case Actor.SORT -> sortHand(activeHand);
+                case Actor.KNOCK -> knock(activeHand);
+                default -> false;
+            };
+        }
+        return false;
     }
 
     private boolean draw(Hand activeHand) {
         Card newCard = deck.draw();
-        System.out.println("You drew a  " + newCard);
+        System.out.println("You drew a  " + newCard.display());
         activeHand.addCard(newCard);
         return false;
     }
@@ -104,7 +112,7 @@ public class Table {
         activeRound = false;
         System.out.println(activeHand.sumHand());
         System.out.println(activeHand.getName() + "has knocked!");
-        return false;
+        return true;
     }
 
     private void endRound() {
