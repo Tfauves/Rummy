@@ -7,6 +7,6 @@ public interface Actor {
     int KNOCK = 4;
 
     String getName();
-    int getScore();
+    int getPoints();
     int getAction(Hand hand);
 }

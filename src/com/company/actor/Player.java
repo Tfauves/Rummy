@@ -7,11 +7,11 @@ import com.company.util.Console;
 
 public class Player implements Actor {
     private final String name;
-    private int score;
+    private int points = 0;
 
-    public Player(String name, int score) {
+    public Player(String name, int points) {
         this.name = name;
-        this.score = score;
+        this.points = points;
     }
 
     public Player(String name) {
@@ -22,8 +22,8 @@ public class Player implements Actor {
         return name;
     }
 
-    public int getScore() {
-        return score;
+    public int getPoints() {
+        return points;
     }
 
     @Override
