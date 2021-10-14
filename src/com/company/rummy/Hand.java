@@ -1,17 +1,13 @@
 package com.company.rummy;
 
 import com.company.deck.Card;
-import com.company.deck.PlayingCard;
-import com.company.util.Console;
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Hand {
     private List<Card> cards = new ArrayList<>();
     private Actor holder;
+    private int handPoints;
 
     public Hand(Actor player) {
         this.holder = player;
@@ -26,20 +22,24 @@ public class Hand {
     }
 
     public int sumHand() {
-        int score = 0;
+        handPoints = 0;
         for (Card card : cards) {
           int value = card.getRank();
           switch (value) {
             case 1 -> {
                 value = 1;
-                score += value;
+                handPoints += value;
             }
-            case 11, 12, 13 -> score += 10;
-            default -> score += value;
+            case 11, 12, 13 -> handPoints += 10;
+            default -> handPoints += value;
           };
        }
 
-       return score;
+       return handPoints;
+    }
+
+    public void playerPoints() {
+        holder.setPoints();
     }
 
     public String displayHand() {

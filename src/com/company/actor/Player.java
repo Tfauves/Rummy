@@ -40,5 +40,7 @@ public class Player implements Actor {
         return outPut.toString();
     }
 
-
+    public void setPoints(int points) {
+        this.points = points;
+    }
 }

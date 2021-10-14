@@ -4,9 +4,7 @@ package com.company.rummy;
 import com.company.actor.Player;
 import com.company.deck.*;
 import com.company.util.Console;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Table {
