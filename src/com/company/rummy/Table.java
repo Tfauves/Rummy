@@ -32,9 +32,9 @@ public class Table {
 
     public void playARound() {
         activeRound = true;
-       // while (activeRound) {
+       while (activeRound) {
             playerTurn();
-        //}
+        }
     }
 
     public void deal() {
@@ -61,8 +61,12 @@ public class Table {
                 while (true) {
                     if (!turn(player)) break;
                     if (!activeRound) {
-                        System.out.println("would you like to play again? y/n");
-                        System.exit(200);
+                        determineWinner();
+                        String newGame = Console.getString("Would you like to play again? y/n",true);
+                        if (newGame.equals("y")) {
+
+                        }
+
                     }
 
                 }
@@ -77,7 +81,7 @@ public class Table {
     }
 
     private boolean turn(Hand activeHand) {
-        while (activeRound) {
+       // while (activeRound) {
             System.out.println(discardPile.get(discardPile.size() - 1).display());
             System.out.println(activeHand.getName());
             int action = activeHand.getAction();
@@ -88,8 +92,8 @@ public class Table {
                 case Actor.KNOCK -> knock(activeHand);
                 default -> false;
             };
-        }
-        return false;
+       // }
+        //return false;
     }
 
     private boolean draw(Hand activeHand) {
@@ -110,12 +114,25 @@ public class Table {
 
     private boolean knock(Hand activeHand) {
         activeRound = false;
-        System.out.println(activeHand.sumHand());
+//        System.out.println(activeHand.sumHand());
         System.out.println(activeHand.getName() + "has knocked!");
         return true;
     }
 
+    private void determineWinner() {
+        for (Hand players : hands) {
+           int playerPoints = players.sumHand();
+           players.getHolder().setPoints(playerPoints);
+            System.out.println(players.getHolder().getName() + " " + players.getHolder().getPoints());
+        }
+        System.exit(0);
+
+    }
+
     private void endRound() {
+        for (Hand player : hands) {
+
+        }
 
     }
 

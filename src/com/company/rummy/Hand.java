@@ -82,4 +82,12 @@ public class Hand {
     public List<Card> getCards() {
         return cards;
     }
+
+    public Actor getHolder() {
+        return holder;
+    }
+
+    public void discardHand() {
+        cards.clear();
+    }
 }
