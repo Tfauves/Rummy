@@ -34,6 +34,7 @@ public class Table {
         activeRound = true;
        while (activeRound) {
             playerTurn();
+
         }
     }
 
@@ -61,14 +62,8 @@ public class Table {
                 while (true) {
                     if (!turn(player)) break;
                     if (!activeRound) {
-                        determineWinner();
-                        String newGame = Console.getString("Would you like to play again? y/n",true);
-                        if (newGame.equals("y")) {
-
-                        }
-
+                       endRound();
                     }
-
                 }
                 System.out.println(player.displayHand());
                 for (int i = 1; i < player.getCards().size() + 1; i++) {
@@ -92,13 +87,12 @@ public class Table {
                 case Actor.KNOCK -> knock(activeHand);
                 default -> false;
             };
-       // }
-        //return false;
+
     }
 
     private boolean draw(Hand activeHand) {
         Card newCard = deck.draw();
-        System.out.println("You drew a  " + newCard.display());
+        System.out.println("You drew a " + newCard.display());
         activeHand.addCard(newCard);
         return false;
     }
@@ -116,6 +110,7 @@ public class Table {
         activeRound = false;
 //        System.out.println(activeHand.sumHand());
         System.out.println(activeHand.getName() + "has knocked!");
+        displayTable();
         return true;
     }
 
@@ -125,15 +120,25 @@ public class Table {
            players.getHolder().setPoints(playerPoints);
             System.out.println(players.getHolder().getName() + " " + players.getHolder().getPoints());
         }
-        System.exit(0);
 
     }
 
     private void endRound() {
-        for (Hand player : hands) {
-
+        determineWinner();
+        String newGame = Console.getString("Would you like to play again? y/n",true);
+        if (newGame.equals("y")) {
+         resetGame();
+        }else {
+            System.exit(0);
         }
+    }
 
+    private void resetGame() {
+        for (Hand player : hands) {
+            player.discardHand();
+        }
+        discardPile.clear();
+        playGame();
     }
 
 
