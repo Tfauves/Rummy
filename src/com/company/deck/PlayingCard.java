@@ -26,4 +26,8 @@ public class PlayingCard extends Card {
         };
         return outPut + " " + getSuit();
     }
+
+    public int getRank() {
+        return super.getRank();
+    }
 }
