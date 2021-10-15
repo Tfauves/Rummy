@@ -4,13 +4,13 @@ package com.company.rummy;
 import com.company.actor.Player;
 import com.company.deck.*;
 import com.company.util.Console;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+
+import java.util.*;
 
 public class Table {
     private List<Hand> hands = new ArrayList<>();
     private Deck deck;
+    private Map<Integer, String> sets = new HashMap<>();
     private List<Card> discardPile = new ArrayList<>();
     private int playerCount = 0;
     private boolean activeRound = false;
@@ -115,6 +115,12 @@ public class Table {
         displayTable();
         return true;
     }
+
+    private void layDownSet() {
+
+
+    }
+
 
     private void determineWinner() {
         for (Hand players : hands) {

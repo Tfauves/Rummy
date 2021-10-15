@@ -78,12 +78,6 @@ public class Hand {
         return score;
     }
 
-//    public void sortHand(Hand activeHand) {
-//     activeHand.cards.sort(Comparator.comparing(Card::getRank));
-//
-//    }
-
-
     public List<Card> getCards() {
         return cards;
     }
@@ -95,4 +89,6 @@ public class Hand {
     public void discardHand() {
         cards.clear();
     }
+
+
 }
