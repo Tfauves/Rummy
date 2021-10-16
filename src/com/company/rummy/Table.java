@@ -84,7 +84,9 @@ public class Table {
             return switch (action) {
                 case Actor.DRAW -> draw(activeHand);
                 case Actor.DISCARD_DRAW -> drawDiscardedCard(activeHand);
+                // TODO: 10/15/2021 sort method needs to show after a draw as well. 
                 case Actor.SORT -> sortHand(activeHand);
+                // TODO: 10/15/2021 strike this off ??? knock logic in place, need to track deadwood score. 
                 case Actor.KNOCK -> knock(activeHand);
                 case Actor.LAY_DOWN_SET -> draw(activeHand);
                 default -> false;
@@ -123,9 +125,13 @@ public class Table {
     }
 
     private boolean layDownSet(Hand activeHand) {
+        // TODO: 10/15/2021 this output needs to be on new line. 
         String input = Console.getString("Play set? y/n:", true);
         switch (input) {
             case "y" -> {
+                // TODO: 10/15/2021 after sort option is used and new sorted hand is shown with indexes to play  
+                // TODO: 10/15/2021 player must select at least 3 cards of the same rank selected cards will then be removed from hand. 
+                // TODO: 10/15/2021 cards played for a set are placed onto set area on the table(hash map???) 
                 int index = Console.getInt("\nEnter card to play", 0, 11, "invalid selection");
             }
             default -> {
