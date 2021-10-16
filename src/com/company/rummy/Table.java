@@ -86,7 +86,7 @@ public class Table {
                 case Actor.SORT -> sortHand(activeHand);
                 // TODO: 10/15/2021 strike this off ??? knock logic in place, need to track deadwood score. 
                 case Actor.KNOCK -> knock(activeHand);
-                case Actor.LAY_DOWN_SET -> draw(activeHand);
+//                case Actor.LAY_DOWN_SET -> draw(activeHand);
                 default -> false;
             };
 
@@ -96,6 +96,7 @@ public class Table {
         Card newCard = deck.draw();
         System.out.println("You drew a " + newCard.display());
         activeHand.addCard(newCard);
+        sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
         layDownSet(activeHand);
         return false;
@@ -120,8 +121,7 @@ public class Table {
     }
 
     private boolean layDownSet(Hand activeHand) {
-        // TODO: 10/15/2021 this output needs to be on new line. 
-        String input = Console.getString("Play set? y/n:", true);
+        String input = Console.getString("\nPlay set? y/n:", true);
         switch (input) {
             case "y" -> {
                 sortHand(activeHand);
@@ -134,7 +134,6 @@ public class Table {
                 setPlayArea.add(activeHand.getCards().remove(cardAt2 - 1));
                 setPlayArea.add(activeHand.getCards().remove(cardAt3 - 1));
 
-                // TODO: 10/15/2021 after sort option is used and new sorted hand is shown with indexes to play
                 // TODO: 10/15/2021 player must select at least 3 cards of the same rank selected cards will then be removed from hand.
                 // TODO: 10/15/2021 cards played for a set are placed onto set area on the table(hash map???)
             }
