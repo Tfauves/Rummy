@@ -120,6 +120,16 @@ public class Table {
         return true;
     }
 
+    private void playCard(Hand activeHand, int index) {
+        Card playCard = activeHand.getCards().get(index - 1);
+        List<Card> tempList = new ArrayList<>();
+        tempList.add(playCard);
+        for (int i = 0; i < tempList.size(); i++) {
+
+        }
+//        setPlayArea.add(playCard);
+    }
+
     private boolean layDownSet(Hand activeHand) {
         String input = Console.getString("\nPlay set? y/n:", true);
         switch (input) {
@@ -127,12 +137,16 @@ public class Table {
                 sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
                 int cardAt1 = Console.getInt("\nEnter card to play", 1, 11, "invalid selection");
-                int cardAt2 = Console.getInt("\nEnter card to play", 1, 11, "invalid selection");
-                int cardAt3 = Console.getInt("\nEnter card to play", 1, 11, "invalid selection");
-                // TODO: 10/16/2021 need error check to make sure the rank of chosen cards are the same(if card at index of card input then set to play area.)
-                setPlayArea.add(activeHand.getCards().remove(cardAt1 - 1));
-                setPlayArea.add(activeHand.getCards().remove(cardAt2 - 1));
-                setPlayArea.add(activeHand.getCards().remove(cardAt3 - 1));
+                Card card1 = activeHand.getCards().get(cardAt1 - 1);
+                setPlayArea.add(card1);
+
+                System.out.println(card1.display() + "hello");
+//                int cardAt2 = Console.getInt("\nEnter card to play", 1, 11, "invalid selection");
+//                int cardAt3 = Console.getInt("\nEnter card to play", 1, 11, "invalid selection");
+//                // TODO: 10/16/2021 need error check to make sure the rank of chosen cards are the same(if card at index of card input then set to play area.)
+//                setPlayArea.add(activeHand.getCards().remove(cardAt1 - 1));
+//                setPlayArea.add(activeHand.getCards().remove(cardAt2 - 1));
+//                setPlayArea.add(activeHand.getCards().remove(cardAt3 - 1));
                 //something blows up when index 10 is selected?????
                 // TODO: 10/15/2021 cards played for a set are placed onto set area on the table(hash map???)
             }
