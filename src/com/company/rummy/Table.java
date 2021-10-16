@@ -133,8 +133,7 @@ public class Table {
                 setPlayArea.add(activeHand.getCards().remove(cardAt1 - 1));
                 setPlayArea.add(activeHand.getCards().remove(cardAt2 - 1));
                 setPlayArea.add(activeHand.getCards().remove(cardAt3 - 1));
-
-                // TODO: 10/15/2021 player must select at least 3 cards of the same rank selected cards will then be removed from hand.
+                //something blows up when index 10 is selected?????
                 // TODO: 10/15/2021 cards played for a set are placed onto set area on the table(hash map???)
             }
             default -> {
@@ -144,7 +143,6 @@ public class Table {
         }
         return true;
     }
-
 
     private void determineWinner() {
         for (Hand players : hands) {
