@@ -86,7 +86,7 @@ public class Table {
                 case Actor.DISCARD_DRAW -> drawDiscardedCard(activeHand);
                 case Actor.SORT -> sortHand(activeHand);
                 case Actor.KNOCK -> knock(activeHand);
-                case Actor.LAY_DOWN_SET -> layDownSet(activeHand);
+                case Actor.LAY_DOWN_SET -> draw(activeHand);
                 default -> false;
             };
 
@@ -96,6 +96,11 @@ public class Table {
         Card newCard = deck.draw();
         System.out.println("You drew a " + newCard.display());
         activeHand.addCard(newCard);
+        System.out.println(activeHand.displayHand());
+        for (int i = 1; i < activeHand.getCards().size() + 1; i++) {
+            System.out.print(i + "    ");
+        }
+        layDownSet(activeHand);
         return false;
     }
 
@@ -118,10 +123,7 @@ public class Table {
     }
 
     private boolean layDownSet(Hand activeHand) {
-        activeHand.displayHand();
-        for (int i = 1; i < activeHand.getCards().size() + 1; i++) {
-
-        }
+        int index = Console.getInt("\nEnter card to play", 0, 11, "invalid selection");
         return true;
     }
 
