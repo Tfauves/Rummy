@@ -123,7 +123,16 @@ public class Table {
     }
 
     private boolean layDownSet(Hand activeHand) {
-        int index = Console.getInt("\nEnter card to play", 0, 11, "invalid selection");
+        String input = Console.getString("Play set? y/n:", true);
+        switch (input) {
+            case "y" -> {
+                int index = Console.getInt("\nEnter card to play", 0, 11, "invalid selection");
+            }
+            default -> {
+                return true;
+            }
+
+        }
         return true;
     }
 

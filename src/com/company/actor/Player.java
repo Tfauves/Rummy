@@ -28,7 +28,7 @@ public class Player implements Actor {
     }
 
     public String getAvailableActions(Hand hand) {
-        actionsCount = 4;
+        actionsCount = 5;
         StringBuilder outPut = new StringBuilder();
         outPut.append("1. Draw from deck\n2. Pick up discarded card\n3. Sort\n4. Knock\n5. Play card");
 //        int deadWood = hand.sumHand();
