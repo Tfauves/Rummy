@@ -86,6 +86,7 @@ public class Table {
                 case Actor.DISCARD_DRAW -> drawDiscardedCard(activeHand);
                 case Actor.SORT -> sortHand(activeHand);
                 case Actor.KNOCK -> knock(activeHand);
+                case Actor.LAY_DOWN_SET -> layDownSet(activeHand);
                 default -> false;
             };
 
@@ -116,9 +117,12 @@ public class Table {
         return true;
     }
 
-    private void layDownSet() {
+    private boolean layDownSet(Hand activeHand) {
+        activeHand.displayHand();
+        for (int i = 1; i < activeHand.getCards().size() + 1; i++) {
 
-
+        }
+        return true;
     }
 
 
