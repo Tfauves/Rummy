@@ -66,10 +66,11 @@ public class Table {
                        endRound();
                     }
                 }
-                System.out.println(player.displayHand());
-                for (int i = 1; i < player.getCards().size() + 1; i++) {
-                    System.out.print(i + "    ");
-                }
+//                System.out.println(player.displayHand());
+//                for (int i = 1; i < player.getCards().size() + 1; i++) {
+//                    System.out.print(i + "    ");
+//                }
+                Console.showHandWithIndex(player);
                 int index = Console.getInt("\nEnter number to discard", 0, 11, "invalid selection");
                 discardPile.add(player.getCards().remove(index - 1));
                 Console.getString("Enter to start next turn", false);
@@ -98,10 +99,11 @@ public class Table {
         Card newCard = deck.draw();
         System.out.println("You drew a " + newCard.display());
         activeHand.addCard(newCard);
-        System.out.println(activeHand.displayHand());
-        for (int i = 1; i < activeHand.getCards().size() + 1; i++) {
-            System.out.print(i + "    ");
-        }
+//        System.out.println(activeHand.displayHand());
+//        for (int i = 1; i < activeHand.getCards().size() + 1; i++) {
+//            System.out.print(i + "    ");
+//        }
+        Console.showHandWithIndex(activeHand);
         layDownSet(activeHand);
         return false;
     }
@@ -129,6 +131,8 @@ public class Table {
         String input = Console.getString("Play set? y/n:", true);
         switch (input) {
             case "y" -> {
+                sortHand(activeHand);
+
                 // TODO: 10/15/2021 after sort option is used and new sorted hand is shown with indexes to play  
                 // TODO: 10/15/2021 player must select at least 3 cards of the same rank selected cards will then be removed from hand. 
                 // TODO: 10/15/2021 cards played for a set are placed onto set area on the table(hash map???) 

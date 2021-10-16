@@ -1,5 +1,7 @@
 package com.company.util;
 
+import com.company.rummy.Hand;
+
 import java.util.Scanner;
 
 public class Console {
@@ -35,6 +37,13 @@ public class Console {
         } while (true);
 
         return input;
+    }
+
+    public static void showHandWithIndex(Hand activeHand) {
+        System.out.println(activeHand.displayHand());
+        for (int i = 1; i < activeHand.getCards().size() + 1; i++) {
+            System.out.print(i + "    ");
+        }
     }
 
 }
