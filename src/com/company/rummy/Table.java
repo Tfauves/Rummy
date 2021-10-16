@@ -10,7 +10,8 @@ import java.util.*;
 public class Table {
     private List<Hand> hands = new ArrayList<>();
     private Deck deck;
-    private Map<Integer, String> sets = new HashMap<>();
+//    private Map<Integer, String> sets = new HashMap<>();
+    private List<Card> setPlayArea = new ArrayList<>();
     private List<Card> discardPile = new ArrayList<>();
     private int playerCount = 0;
     private boolean activeRound = false;
@@ -66,10 +67,6 @@ public class Table {
                        endRound();
                     }
                 }
-//                System.out.println(player.displayHand());
-//                for (int i = 1; i < player.getCards().size() + 1; i++) {
-//                    System.out.print(i + "    ");
-//                }
                 Console.showHandWithIndex(player);
                 int index = Console.getInt("\nEnter number to discard", 0, 11, "invalid selection");
                 discardPile.add(player.getCards().remove(index - 1));
@@ -99,10 +96,6 @@ public class Table {
         Card newCard = deck.draw();
         System.out.println("You drew a " + newCard.display());
         activeHand.addCard(newCard);
-//        System.out.println(activeHand.displayHand());
-//        for (int i = 1; i < activeHand.getCards().size() + 1; i++) {
-//            System.out.print(i + "    ");
-//        }
         Console.showHandWithIndex(activeHand);
         layDownSet(activeHand);
         return false;
@@ -132,11 +125,18 @@ public class Table {
         switch (input) {
             case "y" -> {
                 sortHand(activeHand);
+                Console.showHandWithIndex(activeHand);
+                int cardAt1 = Console.getInt("\nEnter card to play", 1, 11, "invalid selection");
+                int cardAt2 = Console.getInt("\nEnter card to play", 1, 11, "invalid selection");
+                int cardAt3 = Console.getInt("\nEnter card to play", 1, 11, "invalid selection");
+                // TODO: 10/16/2021 need error check to make sure the rank of chosen cards are the same(if card at index of card input then set to play area.)
+                setPlayArea.add(activeHand.getCards().remove(cardAt1 - 1));
+                setPlayArea.add(activeHand.getCards().remove(cardAt2 - 1));
+                setPlayArea.add(activeHand.getCards().remove(cardAt3 - 1));
 
-                // TODO: 10/15/2021 after sort option is used and new sorted hand is shown with indexes to play  
-                // TODO: 10/15/2021 player must select at least 3 cards of the same rank selected cards will then be removed from hand. 
-                // TODO: 10/15/2021 cards played for a set are placed onto set area on the table(hash map???) 
-                int index = Console.getInt("\nEnter card to play", 0, 11, "invalid selection");
+                // TODO: 10/15/2021 after sort option is used and new sorted hand is shown with indexes to play
+                // TODO: 10/15/2021 player must select at least 3 cards of the same rank selected cards will then be removed from hand.
+                // TODO: 10/15/2021 cards played for a set are placed onto set area on the table(hash map???)
             }
             default -> {
                 return true;
