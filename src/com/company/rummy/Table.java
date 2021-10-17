@@ -104,6 +104,9 @@ public class Table {
 
     private boolean drawDiscardedCard(Hand activeHand) {
         activeHand.addCard(discardPile.get(discardPile.size() - 1));
+        sortHand(activeHand);
+        Console.showHandWithIndex(activeHand);
+        layDownSet(activeHand);
         return false;
     }
 
@@ -120,27 +123,47 @@ public class Table {
         return true;
     }
 
-    private void playCard(Hand activeHand, int index) {
-        Card playCard = activeHand.getCards().get(index - 1);
+    private void playCard(Hand activeHand) {
         List<Card> tempList = new ArrayList<>();
-        tempList.add(playCard);
-        for (int i = 0; i < tempList.size(); i++) {
+            while (tempList.size() < 3) {
+                sortHand(activeHand);
+                Console.showHandWithIndex(activeHand);
+                int index = Console.getInt("\nEnter card to play", 1, 11, "invalid selection");
+                Card playCard = activeHand.getCards().get(index - 1);
+                activeHand.removeCard(index -1);
+                tempList.add(playCard);
+                setPlayArea.add(playCard);
+            }
+            for (int i = 0; i < tempList.size(); i++) {
+                if (tempList.get(i).getRank() == setPlayArea.get(i).getRank()) {
+                    System.out.println(setPlayArea.get(i).display());
+                } else {
+                    System.out.println("not a matching set");
+                    for (Card card : tempList) {
+                    activeHand.addCard(card);
+                    }
+                    setPlayArea.clear();
+                    tempList.clear();
+                    return;
+                }
+            }
+            System.out.println("Good set");
+            tempList.clear();
 
-        }
-//        setPlayArea.add(playCard);
     }
 
     private boolean layDownSet(Hand activeHand) {
         String input = Console.getString("\nPlay set? y/n:", true);
         switch (input) {
             case "y" -> {
-                sortHand(activeHand);
-                Console.showHandWithIndex(activeHand);
-                int cardAt1 = Console.getInt("\nEnter card to play", 1, 11, "invalid selection");
-                Card card1 = activeHand.getCards().get(cardAt1 - 1);
-                setPlayArea.add(card1);
+//                sortHand(activeHand);
+//                Console.showHandWithIndex(activeHand);
+                playCard(activeHand);
+//                int cardAt1 = Console.getInt("\nEnter card to play", 1, 11, "invalid selection");
+//                Card card1 = activeHand.getCards().get(cardAt1 - 1);
+//                setPlayArea.add(card1);
 
-                System.out.println(card1.display() + "hello");
+//                System.out.println(card1.display() + "hello");
 //                int cardAt2 = Console.getInt("\nEnter card to play", 1, 11, "invalid selection");
 //                int cardAt3 = Console.getInt("\nEnter card to play", 1, 11, "invalid selection");
 //                // TODO: 10/16/2021 need error check to make sure the rank of chosen cards are the same(if card at index of card input then set to play area.)

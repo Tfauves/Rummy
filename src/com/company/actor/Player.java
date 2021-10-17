@@ -28,14 +28,14 @@ public class Player implements Actor {
     }
 
     public String getAvailableActions(Hand hand) {
-        actionsCount = 5;
+        actionsCount = 3;
         StringBuilder outPut = new StringBuilder();
-        outPut.append("1. Draw from deck\n2. Pick up discarded card\n3. Sort\n4. Knock\n5. Play card");
-//        int deadWood = hand.sumHand();
-//        if (deadWood <= 10) {
-//            outPut.append("\n4. Knock");
-//            actionsCount++;
-//        }
+        outPut.append("1. Draw from deck\n2. Pick up discarded card\n3. Sort");
+        int deadWood = hand.sumHand();
+        if (deadWood <= 10) {
+            outPut.append("\n4. Knock");
+            actionsCount++;
+        }
         return outPut.toString();
     }
 
