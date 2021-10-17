@@ -143,11 +143,13 @@ public class Table {
         switch (input) {
             case "y" -> {
                 int meldSize = Console.getInt("select number of cards to meld (3 or 4)", 3, 4, "invalid input");
+
                 int counter = 0;
-                while (counter <= meldSize - 1) {
+                while (counter < meldSize) {
                     int index = Console.getInt("enter card number",1, 11, "invalid");
                     Card meldCard = activeHand.getCards().get(index - 1);
                     System.out.println(meldCard.display());
+
                     counter++;
                 }
 
