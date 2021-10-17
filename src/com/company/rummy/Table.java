@@ -11,7 +11,7 @@ public class Table {
     private List<Hand> hands = new ArrayList<>();
     private Deck deck;
 //    private Map<Integer, String> sets = new HashMap<>();
-    private List<Card> setPlayArea = new ArrayList<>();
+    private List<Card[]> setPlayArea = new ArrayList<>();
     private List<Card> discardPile = new ArrayList<>();
     private int playerCount = 0;
     private boolean activeRound = false;
@@ -98,7 +98,8 @@ public class Table {
         activeHand.addCard(newCard);
         sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
-        layDownSet(activeHand);
+//        layDownSet(activeHand);
+        findSet(activeHand);
         return false;
     }
 
@@ -124,31 +125,17 @@ public class Table {
     }
 
     private void playCard(Hand activeHand) {
-        List<Card> tempList = new ArrayList<>();
-            while (tempList.size() < 3) {
-                sortHand(activeHand);
-                Console.showHandWithIndex(activeHand);
-                int index = Console.getInt("\nEnter card to play", 1, 11, "invalid selection");
-                Card playCard = activeHand.getCards().get(index - 1);
-                activeHand.removeCard(index -1);
-                tempList.add(playCard);
-                setPlayArea.add(playCard);
+
+
+    }
+
+    private void findSet(Hand activeHand) {
+        for (int i = 0; i < activeHand.getCards().size() -1; i++) {
+            Card cardAt = activeHand.getCards().get(i);
+            if (cardAt.getRank() == activeHand.getCards().get(i + 1).getRank()) {
+                System.out.println("set found");
             }
-            for (int i = 0; i < tempList.size(); i++) {
-                if (tempList.get(i).getRank() == setPlayArea.get(i).getRank()) {
-                    System.out.println(setPlayArea.get(i).display());
-                } else {
-                    System.out.println("not a matching set");
-                    for (Card card : tempList) {
-                    activeHand.addCard(card);
-                    }
-                    setPlayArea.clear();
-                    tempList.clear();
-                    return;
-                }
-            }
-            System.out.println("Good set");
-            tempList.clear();
+        }
 
     }
 
@@ -158,18 +145,7 @@ public class Table {
             case "y" -> {
                 sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
-//                playCard(activeHand);
-                int cardAt1 = Console.getInt("\nEnter card to play", 1, 4, "invalid selection");
-                int cardAt2 = Console.getInt("\nEnter card to play", 1, 4, "invalid selection");
-                int cardAt3 = Console.getInt("\nEnter card to play", 1, 4, "invalid selection");
-                Card card1 = activeHand.getCards().get(cardAt1 - 1);
-                Card card2 = activeHand.getCards().get(cardAt2 - 1);
-                Card card3 = activeHand.getCards().get(cardAt3 - 1);
 
-//                // TODO: 10/16/2021 need error check to make sure the rank of chosen cards are the same(if card at index of card input then set to play area.)
-                setPlayArea.add(activeHand.getCards().remove(cardAt1 - 1));
-                System.out.println(setPlayArea);
-                // TODO: 10/15/2021 cards played for a set are placed onto set area on the table(hash map???)
             }
             default -> {
                 return true;
