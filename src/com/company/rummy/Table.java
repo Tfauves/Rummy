@@ -98,8 +98,8 @@ public class Table {
         activeHand.addCard(newCard);
         sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
-//        layDownSet(activeHand);
-        findSet(activeHand);
+        layDownSet(activeHand);
+//        findSet(activeHand);
         return false;
     }
 
@@ -126,7 +126,6 @@ public class Table {
 
     private void playCard(Hand activeHand) {
 
-
     }
 
     private void findSet(Hand activeHand) {
@@ -140,11 +139,17 @@ public class Table {
     }
 
     private boolean layDownSet(Hand activeHand) {
-        String input = Console.getString("\nPlay set? y/n:", true);
+        String input = Console.getString("\nmeld set? y/n:", true);
         switch (input) {
             case "y" -> {
-                sortHand(activeHand);
-                Console.showHandWithIndex(activeHand);
+                int meldSize = Console.getInt("select number of cards to meld (3 or 4)", 3, 4, "invalid input");
+                int counter = 0;
+                while (counter <= meldSize - 1) {
+                    int index = Console.getInt("enter card number",1, 11, "invalid");
+                    Card meldCard = activeHand.getCards().get(index - 1);
+                    System.out.println(meldCard.display());
+                    counter++;
+                }
 
             }
             default -> {
