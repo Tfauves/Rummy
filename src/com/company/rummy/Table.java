@@ -149,18 +149,21 @@ public class Table {
                     Console.showHandWithIndex(activeHand);
                     int index = Console.getInt("\nenter card number",1, 11, "invalid");
                     Card meldCard = activeHand.getCards().get(index - 1);
+                    activeHand.getHolder().setPoints(activeHand.getHolder().getPoints() + activeHand.playerPoints(meldCard));;
                     tempList.add(meldCard);
                     System.out.println(meldCard.display());
                     activeHand.removeCard(index - 1);
-//                    sortHand(activeHand);
                     counter++;
                 }
                 System.out.println(tempList);
+                System.out.println("points: " + activeHand.getHolder().getPoints());
+                for (int i = 0; i < tempList.size(); i++) {
+                    System.out.println(tempList.get(i));
+                }
             }
             default -> {
                 return true;
             }
-
         }
         return true;
     }

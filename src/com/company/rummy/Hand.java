@@ -42,7 +42,18 @@ public class Hand {
        return handPoints;
     }
 
-    public void playerPoints() {
+    public int playerPoints(Card cardPlayed) {
+        handPoints = 0;
+        int value = cardPlayed.getRank();
+        switch (value) {
+            case 1 -> {
+                value = 1;
+                handPoints += value;
+            }
+            case 11, 12, 13 -> handPoints += 10;
+            default -> handPoints += value;
+        }
+        return handPoints;
 
     }
 
