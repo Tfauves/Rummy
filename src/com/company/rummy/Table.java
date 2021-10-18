@@ -143,16 +143,19 @@ public class Table {
         switch (input) {
             case "y" -> {
                 int meldSize = Console.getInt("select number of cards to meld (3 or 4)", 3, 4, "invalid input");
-
+                List<Card> tempList = new ArrayList<>();
                 int counter = 0;
                 while (counter < meldSize) {
-                    int index = Console.getInt("enter card number",1, 11, "invalid");
+                    Console.showHandWithIndex(activeHand);
+                    int index = Console.getInt("\nenter card number",1, 11, "invalid");
                     Card meldCard = activeHand.getCards().get(index - 1);
+                    tempList.add(meldCard);
                     System.out.println(meldCard.display());
-
+                    activeHand.removeCard(index - 1);
+//                    sortHand(activeHand);
                     counter++;
                 }
-
+                System.out.println(tempList);
             }
             default -> {
                 return true;
