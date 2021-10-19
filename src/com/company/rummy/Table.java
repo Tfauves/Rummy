@@ -127,12 +127,23 @@ public class Table {
 
     private void playCard(Hand activeHand) {
         List<Card> tempList = new ArrayList<>();
-        int userInput = Console.getInt("\nenter card number",1, 11, "invalid");
-        int index = userInput -1;
-        Card meldCard = activeHand.getCards().get(index);
-        tempList.add(meldCard);
+        int userInput = Console.getInt("\nenter card number", 1, 11, "invalid");
+        while (tempList.size() < 3) {
+            sortHand(activeHand);
+//            Console.showHandWithIndex(activeHand);
+            int index = userInput - 1;
+            Card meldCard = activeHand.getCards().get(index);
+        if (meldCard.getRank() == activeHand.getCards().get(index).getRank()) {
+            tempList.add(meldCard);
+            activeHand.removeCard(index);
 
-        System.out.println(meldCard.display());
+        } else {
+            System.out.println("not a match");
+            break;
+        }
+
+        }
+            System.out.println(tempList);
     }
 
     private void findSet(Hand activeHand) {
