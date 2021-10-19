@@ -98,7 +98,8 @@ public class Table {
         activeHand.addCard(newCard);
         sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
-        layDownSet(activeHand);
+//        layDownSet(activeHand);
+        playCard(activeHand);
 //        findSet(activeHand);
         return false;
     }
@@ -125,7 +126,13 @@ public class Table {
     }
 
     private void playCard(Hand activeHand) {
+        List<Card> tempList = new ArrayList<>();
+        int userInput = Console.getInt("\nenter card number",1, 11, "invalid");
+        int index = userInput -1;
+        Card meldCard = activeHand.getCards().get(index);
+        tempList.add(meldCard);
 
+        System.out.println(meldCard.display());
     }
 
     private void findSet(Hand activeHand) {
