@@ -68,7 +68,8 @@ public class Table {
                     }
                 }
                 Console.showHandWithIndex(player);
-                int index = Console.getInt("\nEnter number to discard", 0, 11, "invalid selection");
+                sortHand(player);
+                int index = Console.getInt("\nEnter number to discard", 1, 11, "invalid selection");
                 discardPile.add(player.getCards().remove(index - 1));
                 Console.getString("Enter to start next turn", false);
             }
@@ -133,12 +134,21 @@ public class Table {
 //            Console.showHandWithIndex(activeHand);
             int index = userInput - 1;
             Card meldCard = activeHand.getCards().get(index);
-        if (meldCard.getRank() == activeHand.getCards().get(index).getRank()) {
+            if (tempList.size() == 0) {
+                tempList.add(meldCard);
+                activeHand.removeCard(index);
+            }
+        else if (meldCard.getRank() == tempList.get(0).getRank()) {
             tempList.add(meldCard);
             activeHand.removeCard(index);
 
         } else {
             System.out.println("not a match");
+//            activeHand.addCard(meldCard);
+            for (Card cards : tempList) {
+                activeHand.addCard(cards);
+            }
+                tempList.clear();
             break;
         }
 
