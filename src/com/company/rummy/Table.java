@@ -100,8 +100,7 @@ public class Table {
         sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
         layDownSet(activeHand);
-//        playCard(activeHand);
-//        findSet(activeHand);
+
         return false;
     }
 
@@ -128,74 +127,39 @@ public class Table {
 
     private void playCard(Hand activeHand) {
         List<Card> tempList = new ArrayList<>();
+        int meldSize = Console.getInt("select number of cards to meld (3 or 4)", 3, 4, "invalid input");
         int userInput = Console.getInt("\nenter card number", 1, 11, "invalid");
-        while (tempList.size() < 3) {
+        while (tempList.size() < meldSize) {
             sortHand(activeHand);
-//            Console.showHandWithIndex(activeHand);
             int index = userInput - 1;
             Card meldCard = activeHand.getCards().get(index);
             if (tempList.size() == 0) {
                 tempList.add(meldCard);
                 activeHand.removeCard(index);
             }
-        else if (meldCard.getRank() == tempList.get(0).getRank()) {
+            else if (meldCard.getRank() == tempList.get(0).getRank()) {
             tempList.add(meldCard);
             activeHand.removeCard(index);
-
-        } else {
-            System.out.println("not a match");
-//            activeHand.addCard(meldCard);
-            for (Card cards : tempList) {
+            }
+            else {
+                System.out.println("not a match");
+                for (Card cards : tempList) {
                 activeHand.addCard(cards);
-            }
+                }
                 tempList.clear();
-            break;
-        }
-
-        }
-            System.out.println(tempList);
-    }
-
-    private void findSet(Hand activeHand) {
-        for (int i = 0; i < activeHand.getCards().size() -1; i++) {
-            Card cardAt = activeHand.getCards().get(i);
-            if (cardAt.getRank() == activeHand.getCards().get(i + 1).getRank()) {
-                System.out.println("set found");
+                break;
             }
+
         }
-
+        System.out.println(tempList);
     }
-
 
     private boolean layDownSet(Hand activeHand) {
         String input = Console.getString("\nmeld set? y/n:", true);
         switch (input) {
             case "y" -> {
-                int meldSize = Console.getInt("select number of cards to meld (3 or 4)", 3, 4, "invalid input");
-                List<Card> tempList = new ArrayList<>();
-                int counter = 0;
-                while (counter < meldSize) {
-                    Console.showHandWithIndex(activeHand);
-                    int index = Console.getInt("\nenter card number",1, 11, "invalid");
-                    Card meldCard = activeHand.getCards().get(index - 1);
-//                    activeHand.getHolder().setPoints(activeHand.getHolder().getPoints() + activeHand.playerPoints(meldCard));;
-                    tempList.add(meldCard);
-                    System.out.println(meldCard.display());
-                    activeHand.removeCard(index - 1);
-                    counter++;
-                }
+                playCard(activeHand);
 
-                for (int i = 0; i < tempList.size() -1; i++) {
-                        if (tempList.get(i).getRank() == tempList.get(i + 1).getRank()) {
-                            System.out.println("good set");
-                        } else {
-                            activeHand.addCard(tempList.get(i));
-                            System.out.println("set is not a match");
-                        }
-                    }
-
-                System.out.println(tempList);
-//                System.out.println("points: " + activeHand.getHolder().getPoints());
             }
             default -> {
                 return true;
@@ -203,6 +167,43 @@ public class Table {
         }
         return true;
     }
+
+
+//    private boolean layDownSet(Hand activeHand) {
+//        String input = Console.getString("\nmeld set? y/n:", true);
+//        switch (input) {
+//            case "y" -> {
+//                int meldSize = Console.getInt("select number of cards to meld (3 or 4)", 3, 4, "invalid input");
+//                List<Card> tempList = new ArrayList<>();
+//                int counter = 0;
+//                while (counter < meldSize) {
+//                    Console.showHandWithIndex(activeHand);
+//                    int index = Console.getInt("\nenter card number",1, 11, "invalid");
+//                    Card meldCard = activeHand.getCards().get(index - 1);
+//                    tempList.add(meldCard);
+//                    System.out.println(meldCard.display());
+//                    activeHand.removeCard(index - 1);
+//                    counter++;
+//                }
+//
+//                for (int i = 0; i < tempList.size() -1; i++) {
+//                    if (tempList.get(i).getRank() == tempList.get(i + 1).getRank()) {
+//                        System.out.println("good set");
+//                    }
+//                    else {
+//                        activeHand.addCard(tempList.get(i));
+//                        System.out.println("set is not a match");
+//                    }
+//                }
+//
+//                System.out.println(tempList);
+//            }
+//            default -> {
+//                return true;
+//            }
+//        }
+//        return true;
+//    }
 
     private void determineWinner() {
         for (Hand players : hands) {
