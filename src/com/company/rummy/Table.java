@@ -149,22 +149,27 @@ public class Table {
                     Console.showHandWithIndex(activeHand);
                     int index = Console.getInt("\nenter card number",1, 11, "invalid");
                     Card meldCard = activeHand.getCards().get(index - 1);
-                    activeHand.getHolder().setPoints(activeHand.getHolder().getPoints() + activeHand.playerPoints(meldCard));;
+//                    activeHand.getHolder().setPoints(activeHand.getHolder().getPoints() + activeHand.playerPoints(meldCard));;
                     tempList.add(meldCard);
                     System.out.println(meldCard.display());
-                    activeHand.removeCard(index - 1);
-                    counter++;
-                }
-                System.out.println(tempList);
-                System.out.println("points: " + activeHand.getHolder().getPoints());
-                for (int i = 0; i < tempList.size(); i++) {
-                    if (tempList.get(0) == tempList.get(i)) {
-                        System.out.println("good set" + tempList.get(i).display());
+
+                for (int i = 0; i < tempList.size() -1; i++) {
+                    if (meldCard.getRank() == tempList.get(i + 1).getRank() ) {
+                        System.out.println("good set" + tempList);
                     } else {
                         activeHand.addCard(tempList.get(i));
                         System.out.println("set is not a match");
                     }
                 }
+
+
+                    activeHand.removeCard(index - 1);
+                    counter++;
+
+
+                }
+                System.out.println(tempList);
+//                System.out.println("points: " + activeHand.getHolder().getPoints());
             }
             default -> {
                 return true;
