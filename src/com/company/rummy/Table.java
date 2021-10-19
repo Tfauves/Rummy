@@ -158,7 +158,12 @@ public class Table {
                 System.out.println(tempList);
                 System.out.println("points: " + activeHand.getHolder().getPoints());
                 for (int i = 0; i < tempList.size(); i++) {
-                    System.out.println(tempList.get(i));
+                    if (tempList.get(0) == tempList.get(i)) {
+                        System.out.println("good set" + tempList.get(i).display());
+                    } else {
+                        activeHand.addCard(tempList.get(i));
+                        System.out.println("set is not a match");
+                    }
                 }
             }
             default -> {
