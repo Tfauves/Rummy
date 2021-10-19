@@ -99,8 +99,8 @@ public class Table {
         activeHand.addCard(newCard);
         sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
-//        layDownSet(activeHand);
-        playCard(activeHand);
+        layDownSet(activeHand);
+//        playCard(activeHand);
 //        findSet(activeHand);
         return false;
     }
@@ -181,19 +181,18 @@ public class Table {
 //                    activeHand.getHolder().setPoints(activeHand.getHolder().getPoints() + activeHand.playerPoints(meldCard));;
                     tempList.add(meldCard);
                     System.out.println(meldCard.display());
+                    activeHand.removeCard(index - 1);
+                    counter++;
+                }
 
-                    for (int i = 0; i < tempList.size() -1; i++) {
-                        if (meldCard.getRank() == tempList.get(i + 1).getRank() ) {
-                            System.out.println("good set" + tempList);
+                for (int i = 0; i < tempList.size() -1; i++) {
+                        if (tempList.get(i).getRank() == tempList.get(i + 1).getRank()) {
+                            System.out.println("good set");
                         } else {
                             activeHand.addCard(tempList.get(i));
                             System.out.println("set is not a match");
                         }
                     }
-
-                    activeHand.removeCard(index - 1);
-                    counter++;
-                }
 
                 System.out.println(tempList);
 //                System.out.println("points: " + activeHand.getHolder().getPoints());
