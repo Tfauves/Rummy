@@ -10,8 +10,8 @@ import java.util.*;
 public class Table {
     private List<Hand> hands = new ArrayList<>();
     private Deck deck;
-//    private Map<Integer, String> sets = new HashMap<>();
-    private List<Card[]> setPlayArea = new ArrayList<>();
+    private Map<Integer, String> sets = new HashMap<>();
+    private List<Card> setPlayArea = new ArrayList<>();
     private List<Card> discardPile = new ArrayList<>();
     private int playerCount = 0;
     private boolean activeRound = false;
@@ -138,6 +138,7 @@ public class Table {
 
     }
 
+
     private boolean layDownSet(Hand activeHand) {
         String input = Console.getString("\nmeld set? y/n:", true);
         switch (input) {
@@ -153,21 +154,19 @@ public class Table {
                     tempList.add(meldCard);
                     System.out.println(meldCard.display());
 
-                for (int i = 0; i < tempList.size() -1; i++) {
-                    if (meldCard.getRank() == tempList.get(i + 1).getRank() ) {
-                        System.out.println("good set" + tempList);
-                    } else {
-                        activeHand.addCard(tempList.get(i));
-                        System.out.println("set is not a match");
+                    for (int i = 0; i < tempList.size() -1; i++) {
+                        if (meldCard.getRank() == tempList.get(i + 1).getRank() ) {
+                            System.out.println("good set" + tempList);
+                        } else {
+                            activeHand.addCard(tempList.get(i));
+                            System.out.println("set is not a match");
+                        }
                     }
-                }
-
 
                     activeHand.removeCard(index - 1);
                     counter++;
-
-
                 }
+
                 System.out.println(tempList);
 //                System.out.println("points: " + activeHand.getHolder().getPoints());
             }
@@ -204,7 +203,6 @@ public class Table {
         discardPile.clear();
         playGame();
     }
-
 
 
 }
