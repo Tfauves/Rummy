@@ -76,18 +76,14 @@ public class Table {
     }
 
     private boolean turn(Hand activeHand) {
-       // while (activeRound) {
             System.out.println(discardPile.get(discardPile.size() - 1).display());
             System.out.println(activeHand.getName());
             int action = activeHand.getAction();
             return switch (action) {
                 case Actor.DRAW -> draw(activeHand);
                 case Actor.DISCARD_DRAW -> drawDiscardedCard(activeHand);
-                // TODO: 10/15/2021 sort method needs to show after a draw as well. 
                 case Actor.SORT -> sortHand(activeHand);
-                // TODO: 10/15/2021 strike this off ??? knock logic in place, need to track deadwood score. 
                 case Actor.KNOCK -> knock(activeHand);
-//                case Actor.LAY_DOWN_SET -> draw(activeHand);
                 default -> false;
             };
 
@@ -99,6 +95,7 @@ public class Table {
         activeHand.addCard(newCard);
         sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
+        activeHand.detectRun();
         layDownSet(activeHand);
 
         return false;

@@ -1,7 +1,6 @@
 package com.company.util;
 
 import com.company.rummy.Hand;
-
 import java.util.Scanner;
 
 public class Console {

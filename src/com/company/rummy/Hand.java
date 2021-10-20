@@ -1,11 +1,7 @@
 package com.company.rummy;
 
 import com.company.deck.Card;
-import com.company.deck.PlayingCard;
-
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class Hand {
@@ -23,6 +19,16 @@ public class Hand {
 
     public Card removeCard(int index) {
         return cards.remove(index);
+    }
+
+    public void detectRun() {
+        List<Card> tempList = new ArrayList<>();
+        for (int i = 0; i < cards.size() - 1; i++) {
+           if (cards.get(i).getSuit().equals(cards.get(i + 1).getSuit())){
+
+            System.out.println(cards.get(i).display());
+           }
+        }
     }
 
     public int sumHand() {
