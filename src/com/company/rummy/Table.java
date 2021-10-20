@@ -167,7 +167,7 @@ public class Table {
                 tempList.add(meldCard);
                 activeHand.removeCard(index);
             }
-            else if (meldCard.getRank() == tempList.get(0).getRank()) {
+            else if (meldCard.getSuit().equals(tempList.get(0).getSuit())) {
                 tempList.add(meldCard);
                 activeHand.removeCard(index);
             }
@@ -182,17 +182,15 @@ public class Table {
             }
 
         }
-        setPlayArea.addAll(tempList);
-        if (setPlayArea.size() > 0) {
-            System.out.println("current sets played: " + setPlayArea);
-        }
+            System.out.println("current runs played: " + tempList);
+
     }
 
 
 
     private void layDownSet(Hand activeHand) {
         sortHand(activeHand);
-        String input = Console.getString("\nmeld set? or run? s/r:", true);
+        String input = Console.getString("\nmeld set? or run? s/r:\nEnter to skip:", false);
         switch (input) {
             case "s" -> {
             playSetCard(activeHand);
@@ -200,8 +198,6 @@ public class Table {
             case "r" -> {
                 playRunCard(activeHand);
             }
-        }
-        if ("s".equals(input)) {
         }
     }
 
