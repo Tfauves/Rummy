@@ -10,7 +10,6 @@ import java.util.*;
 public class Table {
     private List<Hand> hands = new ArrayList<>();
     private Deck deck;
-    private Map<Integer, String> sets = new HashMap<>();
     private List<Card> setPlayArea = new ArrayList<>();
     private List<Card> discardPile = new ArrayList<>();
     private int playerCount = 0;
@@ -147,25 +146,23 @@ public class Table {
                 activeHand.addCard(cards);
                 }
                 tempList.clear();
+                layDownSet(activeHand);
                 break;
             }
 
         }
-        System.out.println(tempList);
+        setPlayArea.addAll(tempList);
+        if (setPlayArea.size() < 0) {
+            System.out.println("current sets played: " + setPlayArea);
+        }
     }
 
-    private boolean layDownSet(Hand activeHand) {
+    private void layDownSet(Hand activeHand) {
+        sortHand(activeHand);
         String input = Console.getString("\nmeld set? y/n:", true);
-        switch (input) {
-            case "y" -> {
-                playCard(activeHand);
-
-            }
-            default -> {
-                return true;
-            }
+        if ("y".equals(input)) {
+            playCard(activeHand);
         }
-        return true;
     }
 
 
