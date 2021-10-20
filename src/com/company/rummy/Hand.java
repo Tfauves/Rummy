@@ -23,12 +23,15 @@ public class Hand {
 
     public void detectRun() {
         List<Card> tempList = new ArrayList<>();
-        for (int i = 0; i < cards.size() - 1; i++) {
-           if (cards.get(i).getSuit().equals(cards.get(i + 1).getSuit())){
-
-            System.out.println(cards.get(i).display());
-           }
+        int count = 0;
+        for (int i = 0; i < cards.size() -1; i ++) {
+            int meldRank = cards.get(i).getRank() + 1;
+            if (cards.get(i + 1).getRank() == meldRank) {
+                meldRank++;
+              tempList.add(cards.get(i));
+            }
         }
+        System.out.println(tempList);
     }
 
     public int sumHand() {
