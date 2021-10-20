@@ -122,7 +122,7 @@ public class Table {
         return true;
     }
 
-    private void playCard(Hand activeHand) {
+    private void playSetCard(Hand activeHand) {
         List<Card> tempList = new ArrayList<>();
         int meldSize = Console.getInt("select number of cards to meld (3 or 4)", 3, 4, "invalid input");
         int userInput = Console.getInt("\nenter card number", 1, 11, "invalid");
@@ -157,9 +157,16 @@ public class Table {
 
     private void layDownSet(Hand activeHand) {
         sortHand(activeHand);
-        String input = Console.getString("\nmeld set? y/n:", true);
-        if ("y".equals(input)) {
-            playCard(activeHand);
+        String input = Console.getString("\nmeld set? or run? s/r:", true);
+        switch (input) {
+            case "s" -> {
+            playSetCard(activeHand);
+            }
+            case "r" -> {
+                playRunCard();
+            }
+        }
+        if ("s".equals(input)) {
         }
     }
 
