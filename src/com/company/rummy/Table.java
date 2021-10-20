@@ -95,7 +95,7 @@ public class Table {
         activeHand.addCard(newCard);
         sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
-        activeHand.detectRun();
+        activeHand.detectRunCard();
         layDownSet(activeHand);
 
         return false;
@@ -155,6 +155,41 @@ public class Table {
         }
     }
 
+    private void playRunCard(Hand activeHand) {
+        List<Card> tempList = new ArrayList<>();
+        int meldSize = Console.getInt("select number of cards to meld (3 or 4)", 3, 4, "invalid input");
+        int userInput = Console.getInt("\nenter card number", 1, 11, "invalid");
+        while (tempList.size() < meldSize) {
+            sortHand(activeHand);
+            int index = userInput - 1;
+            Card meldCard = activeHand.detectRunCard();
+            if (tempList.size() == 0) {
+                tempList.add(meldCard);
+                activeHand.removeCard(index);
+            }
+            else if (meldCard.getRank() == tempList.get(0).getRank()) {
+                tempList.add(meldCard);
+                activeHand.removeCard(index);
+            }
+            else {
+                System.out.println("not a match");
+                for (Card cards : tempList) {
+                    activeHand.addCard(cards);
+                }
+                tempList.clear();
+                layDownSet(activeHand);
+                break;
+            }
+
+        }
+        setPlayArea.addAll(tempList);
+        if (setPlayArea.size() > 0) {
+            System.out.println("current sets played: " + setPlayArea);
+        }
+    }
+
+
+
     private void layDownSet(Hand activeHand) {
         sortHand(activeHand);
         String input = Console.getString("\nmeld set? or run? s/r:", true);
@@ -163,7 +198,7 @@ public class Table {
             playSetCard(activeHand);
             }
             case "r" -> {
-                playRunCard();
+                playRunCard(activeHand);
             }
         }
         if ("s".equals(input)) {
