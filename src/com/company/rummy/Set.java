@@ -78,6 +78,21 @@ public class Set {
 //    }
 
 
+    //    public void detectRun() {
+//        List<Card> tempList = new ArrayList<>();
+//        int count = 0;
+//        for (int i = 0; i < cards.size() -1; i ++) {
+//            int meldRank = cards.get(i).getRank() + 1;
+//            if (cards.get(i + 1).getRank() == meldRank) {
+//                meldRank++;
+//              tempList.add(cards.get(i));
+//            }
+//        }
+//        System.out.println(tempList);
+//    }
+
+
+
 
 
 

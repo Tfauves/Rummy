@@ -23,19 +23,6 @@ public class Hand {
         return cards.remove(index);
     }
 
-//    public void detectRun() {
-//        List<Card> tempList = new ArrayList<>();
-//        int count = 0;
-//        for (int i = 0; i < cards.size() -1; i ++) {
-//            int meldRank = cards.get(i).getRank() + 1;
-//            if (cards.get(i + 1).getRank() == meldRank) {
-//                meldRank++;
-//              tempList.add(cards.get(i));
-//            }
-//        }
-//        System.out.println(tempList);
-//    }
-
     public Card detectRunCard() {
         Card tempCard = null;
         for (int i = 0; i < cards.size() -1; i ++) {
@@ -52,7 +39,6 @@ public class Hand {
 //        System.out.println(tempList);
         return tempCard;
     }
-
 
     public int sumHand() {
         handPoints = 0;
