@@ -25,7 +25,8 @@ public class Table {
     }
 
     public void playGame() {
-        deck = new StandardDeck();
+//        deck = new StandardDeck();
+        deck = new TestDeck();
         deck.shuffle();
         deal();
         playARound();
@@ -124,8 +125,8 @@ public class Table {
 
     private void playSetCard(Hand activeHand) {
         List<Card> tempList = new ArrayList<>();
-        int meldSize = Console.getInt("select number of cards to meld (3 or 4)", 3, 4, "invalid input");
-        int userInput = Console.getInt("\nenter card number", 1, 11, "invalid");
+        int meldSize = Console.getInt("Total meld size (3 or 4)", 3, 4, "invalid input");
+        int userInput = Console.getInt("\nStarting set cards location?", 1, 11, "invalid");
         while (tempList.size() < meldSize) {
             sortHand(activeHand);
             int index = userInput - 1;
@@ -162,23 +163,24 @@ public class Table {
         while (tempList.size() < meldSize) {
             sortHand(activeHand);
             int index = userInput - 1;
-            Card meldCard = activeHand.detectRunCard();
-            if (tempList.size() == 0) {
-                tempList.add(meldCard);
-                activeHand.removeCard(index);
-            }
-            else if (meldCard.getSuit().equals(tempList.get(0).getSuit())) {
-                tempList.add(meldCard);
-                activeHand.removeCard(index);
-            }
-            else {
-                System.out.println("not a match");
-                for (Card cards : tempList) {
-                    activeHand.addCard(cards);
+            for (int i = index; i < activeHand.getCards().size() - 1; i++) {
+                Card meldCard = activeHand.getCards().get(i);
+                int nextRunCardRank = meldCard.getRank() + 1;
+                if (activeHand.getCards().get(i + 1).getRank() == nextRunCardRank) {
+                    tempList.add(meldCard);
+                    tempList.add(activeHand.getCards().get(i));
+                    activeHand.removeCard(index);
                 }
-                tempList.clear();
-                layDownSet(activeHand);
-                break;
+                else {
+                    System.out.println("not a match");
+                    for (Card cards : tempList) {
+                        activeHand.addCard(cards);
+                    }
+                    tempList.clear();
+                    layDownSet(activeHand);
+                    break;
+                }
+
             }
 
         }
