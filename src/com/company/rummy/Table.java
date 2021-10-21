@@ -1,6 +1,5 @@
 package com.company.rummy;
 
-
 import com.company.actor.Player;
 import com.company.deck.*;
 import com.company.util.Console;
@@ -11,6 +10,7 @@ public class Table {
     private List<Hand> hands = new ArrayList<>();
     private Deck deck;
     private List<Card> setPlayArea = new ArrayList<>();
+    private List<Card> runPlayArea = new ArrayList<>();
     private List<Card> discardPile = new ArrayList<>();
     private int playerCount = 0;
     private boolean activeRound = false;
@@ -20,12 +20,12 @@ public class Table {
         for (int count = 0; count < playerCount; count++) {
             Player newPlayer = new Player("Player" + (count + 1) + ": ");
             hands.add(new Hand(newPlayer));
-
         }
     }
 
     public void playGame() {
         deck = new StandardDeck();
+//        deck = new TestDeck();
         deck.shuffle();
         deal();
         playARound();
@@ -35,7 +35,6 @@ public class Table {
         activeRound = true;
        while (activeRound) {
             playerTurn();
-
         }
        endRound();
     }
@@ -76,16 +75,16 @@ public class Table {
     }
 
     private boolean turn(Hand activeHand) {
-            System.out.println(discardPile.get(discardPile.size() - 1).display());
-            System.out.println(activeHand.getName());
-            int action = activeHand.getAction();
-            return switch (action) {
-                case Actor.DRAW -> draw(activeHand);
-                case Actor.DISCARD_DRAW -> drawDiscardedCard(activeHand);
-                case Actor.SORT -> sortHand(activeHand);
-                case Actor.KNOCK -> knock(activeHand);
-                default -> false;
-            };
+        System.out.println(discardPile.get(discardPile.size() - 1).display());
+        System.out.println(activeHand.getName());
+        int action = activeHand.getAction();
+        return switch (action) {
+            case Actor.DRAW -> draw(activeHand);
+            case Actor.DISCARD_DRAW -> drawDiscardedCard(activeHand);
+            case Actor.SORT -> sortHand(activeHand);
+            case Actor.KNOCK -> knock(activeHand);
+            default -> false;
+        };
 
     }
 
@@ -95,9 +94,8 @@ public class Table {
         activeHand.addCard(newCard);
         sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
-        activeHand.detectRun();
+        activeHand.detectRunCard();
         layDownSet(activeHand);
-
         return false;
     }
 
@@ -122,10 +120,10 @@ public class Table {
         return true;
     }
 
-    private void playCard(Hand activeHand) {
+    private void playSetCard(Hand activeHand) {
         List<Card> tempList = new ArrayList<>();
-        int meldSize = Console.getInt("select number of cards to meld (3 or 4)", 3, 4, "invalid input");
-        int userInput = Console.getInt("\nenter card number", 1, 11, "invalid");
+        int meldSize = Console.getInt("Total meld size (3 or 4)", 3, 4, "invalid input");
+        int userInput = Console.getInt("\nStarting set cards location?", 1, 11, "invalid");
         while (tempList.size() < meldSize) {
             sortHand(activeHand);
             int index = userInput - 1;
@@ -145,6 +143,8 @@ public class Table {
                 }
                 tempList.clear();
                 layDownSet(activeHand);
+                sortHand(activeHand);
+                Console.showHandWithIndex(activeHand);
                 break;
             }
 
@@ -155,11 +155,60 @@ public class Table {
         }
     }
 
+
+    private void playRunCard(Hand activeHand) {
+        List<Card> tempList = new ArrayList<>();
+        Card runCard;
+        int meldSize = Console.getInt("select number of cards to meld (3 or 4)", 3, 4, "invalid input");
+        while (tempList.size() < meldSize) {
+            sortHand(activeHand);
+            Console.showHandWithIndex(activeHand);
+            int userInput = Console.getInt("\nEnter card to play", 1, 11, "invalid selection");
+            int cardIndex = userInput - 1;
+            runCard = activeHand.getCards().get(cardIndex);
+            tempList.add(runCard);
+            //could result in crash.
+            activeHand.removeCard(cardIndex);
+        }
+
+
+        for (int i = 0; i < tempList.size() -1; i++) {
+            int cardRank = tempList.get(i).getRank();
+            String cardSuit = tempList.get(i).getSuit();
+            int nextRunCardRank = cardRank + 1;
+            if (tempList.get(i + 1).getRank() == nextRunCardRank && tempList.get(i + 1).getSuit().equals(cardSuit)) {
+                System.out.println("good run");
+            }
+            else {
+                System.out.println("not a match");
+                for (Card cards : tempList) {
+                    activeHand.addCard(cards);
+                }
+                tempList.clear();
+                sortHand(activeHand);
+                Console.showHandWithIndex(activeHand);
+                layDownSet(activeHand);
+                break;
+            }
+        }
+        runPlayArea.addAll(tempList);
+        if (runPlayArea.size() > 0) {
+            System.out.println("current runs played: " + runPlayArea);
+        }
+//        System.out.println(tempList);
+    }
+
+
     private void layDownSet(Hand activeHand) {
         sortHand(activeHand);
-        String input = Console.getString("\nmeld set? y/n:", true);
-        if ("y".equals(input)) {
-            playCard(activeHand);
+        String input = Console.getString("\nmeld set? or run? s/r:\nEnter to skip:", false);
+        switch (input) {
+            case "s" -> {
+            playSetCard(activeHand);
+            }
+            case "r" -> {
+                playRunCard(activeHand);
+            }
         }
     }
 

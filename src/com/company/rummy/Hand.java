@@ -1,6 +1,8 @@
 package com.company.rummy;
 
 import com.company.deck.Card;
+import com.company.deck.PlayingCard;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,18 +23,36 @@ public class Hand {
         return cards.remove(index);
     }
 
-    public void detectRun() {
-        List<Card> tempList = new ArrayList<>();
-        int count = 0;
+//    public void detectRun() {
+//        List<Card> tempList = new ArrayList<>();
+//        int count = 0;
+//        for (int i = 0; i < cards.size() -1; i ++) {
+//            int meldRank = cards.get(i).getRank() + 1;
+//            if (cards.get(i + 1).getRank() == meldRank) {
+//                meldRank++;
+//              tempList.add(cards.get(i));
+//            }
+//        }
+//        System.out.println(tempList);
+//    }
+
+    public Card detectRunCard() {
+        Card tempCard = null;
         for (int i = 0; i < cards.size() -1; i ++) {
-            int meldRank = cards.get(i).getRank() + 1;
-            if (cards.get(i + 1).getRank() == meldRank) {
-                meldRank++;
-              tempList.add(cards.get(i));
+            int tempRank = cards.get(i).getRank();
+            String tempSuit = cards.get(i).getSuit();
+            tempCard = new PlayingCard(tempSuit, tempRank);
+            int nextCardRank = tempRank + 1;
+            if (cards.get(i + 1).getRank() == nextCardRank) {
+                nextCardRank++;
+                return cards.get(i);
+//              tempList.add(cards.get(i));
             }
         }
-        System.out.println(tempList);
+//        System.out.println(tempList);
+        return tempCard;
     }
+
 
     public int sumHand() {
         handPoints = 0;
