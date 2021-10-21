@@ -36,7 +36,7 @@ public class Table {
 //        deck.replenishDeck(discardPile);
        while (activeRound) {
             playerTurn();
-            goOut();
+            goneOut();
         }
        endRound();
     }
@@ -211,14 +211,14 @@ public class Table {
 //        System.out.println(tempList);
     }
 
-    private void goOut() {
+    private void goneOut() {
         for (Hand players : hands) {
            if (players.getCards().size() == 0) {
+               activeRound = false;
                endRound();
            }
         }
     }
-
 
     private void layDownSet(Hand activeHand) {
         sortHand(activeHand);
@@ -231,6 +231,19 @@ public class Table {
                 playRunCard(activeHand);
             }
         }
+    }
+
+    private void addCardToPlay() {
+        String input = Console.getString("\nmeld a card: add to set or run? s/r:", false);
+        switch (input) {
+            case "s" -> {
+                //get sets
+            }
+            case "r" -> {
+                //get runs
+            }
+        }
+
     }
 
     private void determineWinner() {
