@@ -18,6 +18,11 @@ public class DiscardDeck implements Deck {
 
     }
 
+    @Override
+    public void replenishDeck(List<Card> discardCards) {
+
+    }
+
     public List getDiscardedCards() {
         return discardedCards;
     }

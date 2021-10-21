@@ -3,6 +3,8 @@ package com.company.deck;
 
 import com.company.util.Console;
 
+import java.util.List;
+
 public class TestDeck implements Deck {
 
     public final String[] SUITS = {"♦", "♠", "♣", "♥"
@@ -11,6 +13,11 @@ public class TestDeck implements Deck {
     };
 
     public void shuffle() {}
+
+    @Override
+    public void replenishDeck(List<Card> cards) {
+
+    }
 
     @Override
     public Card draw() {

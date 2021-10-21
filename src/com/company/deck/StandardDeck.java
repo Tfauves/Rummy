@@ -20,6 +20,14 @@ public class StandardDeck implements Deck{
         }
     }
 
+    public void replenishDeck(List<Card> discardCards) {
+        if (cards.size() == 1) {
+            cards.addAll(discardCards);
+            shuffle();
+
+        }
+    }
+
     @Override
     public Card draw() {
         return cards.remove(cards.size() - 1);

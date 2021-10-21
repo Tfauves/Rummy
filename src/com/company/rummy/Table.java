@@ -33,14 +33,16 @@ public class Table {
 
     public void playARound() {
         activeRound = true;
+//        deck.replenishDeck(discardPile);
        while (activeRound) {
             playerTurn();
+            goOut();
         }
        endRound();
     }
 
     public void deal() {
-        for (int count = 0; count < 3; count++) {
+        for (int count = 0; count < 10; count++) {
             for (Hand player : hands) {
                 player.addCard(deck.draw());
             }
@@ -162,7 +164,6 @@ public class Table {
         }
     }
 
-
     private void playRunCard(Hand activeHand) {
         List<Card> tempList = new ArrayList<>();
         Card runCard;
@@ -210,9 +211,11 @@ public class Table {
 //        System.out.println(tempList);
     }
 
-    private void goOut(Hand activeHand) {
-        if (activeHand.getCards().size() == 0) {
-            endRound();
+    private void goOut() {
+        for (Hand players : hands) {
+           if (players.getCards().size() == 0) {
+               endRound();
+           }
         }
     }
 
@@ -228,7 +231,6 @@ public class Table {
                 playRunCard(activeHand);
             }
         }
-        goOut(activeHand);
     }
 
     private void determineWinner() {
