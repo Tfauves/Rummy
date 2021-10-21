@@ -25,8 +25,8 @@ public class Table {
     }
 
     public void playGame() {
-//        deck = new StandardDeck();
-        deck = new TestDeck();
+        deck = new StandardDeck();
+//        deck = new TestDeck();
         deck.shuffle();
         deal();
         playARound();
@@ -156,38 +156,48 @@ public class Table {
         }
     }
 
+//    private void playRunCard(Hand activeHand) {
+//        List<Card> tempList = new ArrayList<>();
+//        int meldSize = Console.getInt("select number of cards to meld (3 or 4)", 3, 4, "invalid input");
+//        int userInput = Console.getInt("\nenter card number", 1, 11, "invalid");
+//        while (tempList.size() < meldSize) {
+//            sortHand(activeHand);
+//            int index = userInput - 1;
+//            for (int i = index; i < activeHand.getCards().size() - 1; i++) {
+//                Card meldCard = activeHand.getCards().get(i);
+//                int nextRunCardRank = meldCard.getRank() + 1;
+//                if (activeHand.getCards().get(i + 1).getRank() == nextRunCardRank) {
+//                    tempList.add(meldCard);
+//                    tempList.add(activeHand.getCards().get(i));
+//                    activeHand.removeCard(index);
+//                }
+//                else {
+//                    System.out.println("not a match");
+//                    for (Card cards : tempList) {
+//                        activeHand.addCard(cards);
+//                    }
+//                    tempList.clear();
+//                    layDownSet(activeHand);
+//                    break;
+//                }
+//
+//            }
+//
+//        }
+//            System.out.println("current runs played: " + tempList);
+//
+//    }
+
     private void playRunCard(Hand activeHand) {
         List<Card> tempList = new ArrayList<>();
         int meldSize = Console.getInt("select number of cards to meld (3 or 4)", 3, 4, "invalid input");
-        int userInput = Console.getInt("\nenter card number", 1, 11, "invalid");
-        while (tempList.size() < meldSize) {
-            sortHand(activeHand);
-            int index = userInput - 1;
-            for (int i = index; i < activeHand.getCards().size() - 1; i++) {
-                Card meldCard = activeHand.getCards().get(i);
-                int nextRunCardRank = meldCard.getRank() + 1;
-                if (activeHand.getCards().get(i + 1).getRank() == nextRunCardRank) {
-                    tempList.add(meldCard);
-                    tempList.add(activeHand.getCards().get(i));
-                    activeHand.removeCard(index);
-                }
-                else {
-                    System.out.println("not a match");
-                    for (Card cards : tempList) {
-                        activeHand.addCard(cards);
-                    }
-                    tempList.clear();
-                    layDownSet(activeHand);
-                    break;
-                }
-
-            }
+        while (tempList.size() <= meldSize) {
+            int cardIndex = Console.getInt("\nEnter card to play", 1, 4, "invalid selection");
+            Card runCard = activeHand.getCards().get(cardIndex - 1);
+            tempList.add(runCard);
 
         }
-            System.out.println("current runs played: " + tempList);
-
     }
-
 
 
     private void layDownSet(Hand activeHand) {

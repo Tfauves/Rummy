@@ -19,7 +19,16 @@ public class TestDeck implements Deck {
         return new Card(SUITS[suit - 1], faceValue) {
             @Override
             public String display() {
-                return null;
+                String outPut;
+                switch (getRank()) {
+                    case 1 -> outPut = "AC";
+                    case 11 -> outPut = "JK";
+                    case 12 -> outPut = "QU";
+                    case 13 -> outPut = "KI";
+                    default -> outPut = getRank() == 10 ? Integer.toString(getRank()) : " " + getRank();
+                };
+                return outPut + " " + getSuit();
+
             }
         };
     }
