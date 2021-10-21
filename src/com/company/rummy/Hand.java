@@ -101,4 +101,7 @@ public class Hand {
     }
 
 
+    public int getHandPoints() {
+        return handPoints;
+    }
 }

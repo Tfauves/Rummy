@@ -24,8 +24,8 @@ public class Table {
     }
 
     public void playGame() {
-        deck = new StandardDeck();
-//        deck = new TestDeck();
+//        deck = new StandardDeck();
+        deck = new TestDeck();
         deck.shuffle();
         deal();
         playARound();
@@ -42,7 +42,7 @@ public class Table {
     }
 
     public void deal() {
-        for (int count = 0; count < 10; count++) {
+        for (int count = 0; count < 3; count++) {
             for (Hand player : hands) {
                 player.addCard(deck.draw());
             }
@@ -246,6 +246,25 @@ public class Table {
 
     }
 
+    private void totalRdPoints() {
+      for (int i = 0; i < hands.size() - 1; i++) {
+          int player1HandPoints = hands.get(i).sumHand();
+          int player2HandPoints = hands.get(i + 1).sumHand();
+          int totalRdPoints;
+          if (player1HandPoints < player2HandPoints) {
+               totalRdPoints = player2HandPoints - player1HandPoints;
+              hands.get(i).getHolder().setPoints(hands.get(i).getHolder().getPoints() + totalRdPoints);
+          } else {
+              totalRdPoints =  player1HandPoints - player2HandPoints ;
+              hands.get(i + 1).getHolder().setPoints( hands.get(i + 1).getHolder().getPoints() + totalRdPoints);
+          }
+          System.out.println(hands.get(i).getHolder().getName() + hands.get(i).getHolder().getPoints());
+
+      }
+
+
+    }
+
     private void determineWinner() {
         for (Hand players : hands) {
            int playerPoints = players.sumHand();
@@ -257,6 +276,7 @@ public class Table {
 
     private void endRound() {
         determineWinner();
+        totalRdPoints();
         String newGame = Console.getString("Would you like to play again? y/n",true);
         if (newGame.equals("y")) {
          resetGame();
