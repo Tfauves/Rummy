@@ -191,12 +191,20 @@ public class Table {
     private void playRunCard(Hand activeHand) {
         List<Card> tempList = new ArrayList<>();
         int meldSize = Console.getInt("select number of cards to meld (3 or 4)", 3, 4, "invalid input");
-        while (tempList.size() <= meldSize) {
-            int cardIndex = Console.getInt("\nEnter card to play", 1, 4, "invalid selection");
-            Card runCard = activeHand.getCards().get(cardIndex - 1);
+        while (tempList.size() < meldSize) {
+            int userInput = Console.getInt("\nEnter card to play", 1, 4, "invalid selection");
+            int cardIndex = userInput - 1;
+            Card runCard = activeHand.getCards().get(cardIndex);
             tempList.add(runCard);
+            activeHand.removeCard(cardIndex);
+
+            for (int i = 0; i < tempList.size(); i++) {
+                int firstCardRank = tempList.get(i).getRank();
+                String firstCardSuit = tempList.get(i).getSuit();
+            }
 
         }
+        System.out.println(tempList);
     }
 
 
