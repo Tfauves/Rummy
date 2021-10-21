@@ -158,14 +158,19 @@ public class Table {
 
     private void playRunCard(Hand activeHand) {
         List<Card> tempList = new ArrayList<>();
+        Card runCard;
         int meldSize = Console.getInt("select number of cards to meld (3 or 4)", 3, 4, "invalid input");
         while (tempList.size() < meldSize) {
+            sortHand(activeHand);
+            Console.showHandWithIndex(activeHand);
             int userInput = Console.getInt("\nEnter card to play", 1, 11, "invalid selection");
             int cardIndex = userInput - 1;
-            Card runCard = activeHand.getCards().get(cardIndex);
+            runCard = activeHand.getCards().get(cardIndex);
             tempList.add(runCard);
+            //could result in crash.
             activeHand.removeCard(cardIndex);
         }
+
 
         for (int i = 0; i < tempList.size() -1; i++) {
             int cardRank = tempList.get(i).getRank();
