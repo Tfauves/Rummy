@@ -91,7 +91,22 @@ public class Set {
 //        System.out.println(tempList);
 //    }
 
-
+//    public Card detectRunCard() {
+//        Card tempCard = null;
+//        for (int i = 0; i < cards.size() -1; i ++) {
+//            int tempRank = cards.get(i).getRank();
+//            String tempSuit = cards.get(i).getSuit();
+//            tempCard = new PlayingCard(tempSuit, tempRank);
+//            int nextCardRank = tempRank + 1;
+//            if (cards.get(i + 1).getRank() == nextCardRank) {
+//                nextCardRank++;
+//                return cards.get(i);
+////              tempList.add(cards.get(i));
+//            }
+//        }
+////        System.out.println(tempList);
+//        return tempCard;
+//    }
 
 
 

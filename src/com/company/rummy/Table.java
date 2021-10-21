@@ -40,7 +40,7 @@ public class Table {
     }
 
     public void deal() {
-        for (int count = 0; count < 10; count++) {
+        for (int count = 0; count < 3; count++) {
             for (Hand player : hands) {
                 player.addCard(deck.draw());
             }
@@ -178,7 +178,6 @@ public class Table {
             activeHand.removeCard(cardIndex);
         }
 
-
         for (int i = 0; i < tempList.size() -1; i++) {
             int cardRank = tempList.get(i).getRank();
             String cardSuit = tempList.get(i).getSuit();
@@ -211,6 +210,12 @@ public class Table {
 //        System.out.println(tempList);
     }
 
+    private void goOut(Hand activeHand) {
+        if (activeHand.getCards().size() == 0) {
+            endRound();
+        }
+    }
+
 
     private void layDownSet(Hand activeHand) {
         sortHand(activeHand);
@@ -223,6 +228,7 @@ public class Table {
                 playRunCard(activeHand);
             }
         }
+        goOut(activeHand);
     }
 
     private void determineWinner() {
