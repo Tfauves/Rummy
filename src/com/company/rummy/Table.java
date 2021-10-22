@@ -257,6 +257,20 @@ public class Table {
                 //get sets
             }
             case "r" -> {
+                sortHand(activeHand);
+                Console.showHandWithIndex(activeHand);
+                int userChoiceIndex = Console.getInt("\nselect a card to play", 1, 11, "invalid");
+                int runCardIndex = userChoiceIndex - 1;
+                Card runMeldCard = activeHand.getCards().get(runCardIndex);
+                int nextCardRank = runMeldCard.getRank() + 1;
+                activeHand.removeCard(runCardIndex);
+                for (int i = 0; i < runPlayArea.size() - 1; i++) {
+                    if (runMeldCard.getRank() == runPlayArea.get(i + 1).getRank() && runMeldCard.getSuit() == runPlayArea.get(i + 1).getSuit()) {
+                        runPlayArea.add(runMeldCard);
+                        System.out.println(runPlayArea);
+                        break;
+                    }
+                }
                 //get runs
             }
         }
