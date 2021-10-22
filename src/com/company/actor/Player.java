@@ -23,10 +23,6 @@ public class Player implements Actor {
         return name;
     }
 
-    public int getPoints() {
-        return points;
-    }
-
     public String getAvailableActions(Hand hand) {
         actionsCount = 3;
         StringBuilder outPut = new StringBuilder();
@@ -46,6 +42,9 @@ public class Player implements Actor {
         return Console.getInt(getAvailableActions(hand), 1, actionsCount, "invalid action");
     }
 
+    public int getPoints() {
+        return points;
+    }
 
     public void setPoints(int points) {
         this.points = points;
