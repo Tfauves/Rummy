@@ -273,15 +273,13 @@ public class Table {
 
       }
 
-
     }
-
 
     private void determineWinner() {
         for (Hand players : hands) {
-//           int playerPoints = players.sumHand();
+          int playerPoints = players.sumHand();
 //           players.getHolder().setPoints(playerPoints);
-            System.out.println(players.getHolder().getName() + " " + players.getHolder().getPoints());
+            System.out.println(players.getHolder().getName() + "total hand points: " + playerPoints);
         }
 
     }
