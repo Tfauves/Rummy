@@ -287,10 +287,12 @@ public class Table {
     private void endRound() {
         determineWinner();
         totalRdPoints();
-        String newGame = Console.getString("Would you like to play again? y/n",true);
+        String newGame = Console.getString("Would you like to start the next round? y/n",true);
         if (newGame.equals("y")) {
          resetGame();
         }else {
+            gamePoints();
+            System.out.println("thanks for playing");
             System.exit(0);
         }
     }
