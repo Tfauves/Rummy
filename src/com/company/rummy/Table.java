@@ -27,6 +27,7 @@ public class Table {
 //        deck = new StandardDeck();
         deck = new TestDeck();
         deck.shuffle();
+        gamePoints();
         deal();
         playARound();
     }
@@ -42,7 +43,7 @@ public class Table {
     }
 
     public void deal() {
-        for (int count = 0; count < 3; count++) {
+        for (int count = 0; count < 4; count++) {
             for (Hand player : hands) {
                 player.addCard(deck.draw());
             }
@@ -246,6 +247,16 @@ public class Table {
 
     }
 
+    private void gamePoints() {
+        for (Hand players : hands) {
+            System.out.println(players.getHolder().getName() + "Score: " + players.getHolder().getPoints());
+            if (players.getHolder().getPoints() >= 100) {
+                System.out.println(players.getHolder().getName() + "Wins the game");
+                System.exit(200);
+            }
+        }
+    }
+
     private void totalRdPoints() {
       for (int i = 0; i < hands.size() - 1; i++) {
           int player1HandPoints = hands.get(i).sumHand();
@@ -265,10 +276,11 @@ public class Table {
 
     }
 
+
     private void determineWinner() {
         for (Hand players : hands) {
-           int playerPoints = players.sumHand();
-           players.getHolder().setPoints(playerPoints);
+//           int playerPoints = players.sumHand();
+//           players.getHolder().setPoints(playerPoints);
             System.out.println(players.getHolder().getName() + " " + players.getHolder().getPoints());
         }
 
@@ -290,6 +302,8 @@ public class Table {
             player.discardHand();
         }
         discardPile.clear();
+        setPlayArea.clear();
+        runPlayArea.clear();
         playGame();
     }
 
