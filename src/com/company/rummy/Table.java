@@ -223,7 +223,7 @@ public class Table {
 
     private void layDownSet(Hand activeHand) {
         sortHand(activeHand);
-        String input = Console.getString("\nmeld set? or run? s/r:\nEnter to skip:", false);
+        String input = Console.getString("\nmeld set?, run? or card s/r/c:\nEnter to skip:", false);
         switch (input) {
             case "s" -> {
                 playSetCard(activeHand);
@@ -231,21 +231,26 @@ public class Table {
             case "r" -> {
                 playRunCard(activeHand);
             }
+            case "c" -> {
+                addCardToMeld(activeHand);
+            }
         }
     }
 
-    private void addCardToPlay(Hand activeHand) {
+    private void addCardToMeld(Hand activeHand) {
         String input = Console.getString("\nmeld a card: add to set or run? s/r:", false);
         switch (input) {
             case "s" -> {
-                int userCardChoiceIndex = Console.getInt("select a card to play", 1, 11, "invalid");
+                sortHand(activeHand);
+                Console.showHandWithIndex(activeHand);
+                int userCardChoiceIndex = Console.getInt("\nselect a card to play", 1, 11, "invalid");
                 int meldCardIndex = userCardChoiceIndex - 1;
                 Card meldCard = activeHand.getCards().get(meldCardIndex);
                 activeHand.removeCard(meldCardIndex);
                 for (int i = 0; i < setPlayArea.size(); i++) {
                     if (meldCard.getRank() == setPlayArea.get(i).getRank()) {
                         setPlayArea.add(meldCard);
-                        activeHand.removeCard(meldCardIndex);
+                        System.out.println(setPlayArea);
                         break;
                     }
                 }
@@ -257,6 +262,7 @@ public class Table {
         }
 
     }
+
 
     private void gamePoints() {
         for (Hand players : hands) {
