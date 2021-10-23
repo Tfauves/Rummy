@@ -61,10 +61,10 @@ public class Table {
 
     private void displayPlayAreas() {
         if (setPlayArea.size() > 0) {
-            System.out.println("current sets:" + setPlayArea);
+            System.out.println("\ncurrent sets:" + setPlayArea);
         }
         if(runPlayArea.size() > 0) {
-            System.out.println("current runs:" + runPlayArea);
+            System.out.println("\ncurrent runs:" + runPlayArea);
         }
     }
 
@@ -165,7 +165,8 @@ public class Table {
         if (setPlayArea.size() > 0) {
             System.out.println("current sets played: " + setPlayArea);
             String playMoreCards = Console.getString("Play more cards? y/n", false);
-                if ("y".equals(playMoreCards)) {
+            String lowerPlatMoreCards = playMoreCards.toLowerCase();
+                if ("y".equals(lowerPlatMoreCards)) {
                     sortHand(activeHand);
                     Console.showHandWithIndex(activeHand);
                     layDownSet(activeHand);
@@ -212,7 +213,8 @@ public class Table {
         if (runPlayArea.size() > 0) {
             System.out.println("current runs played: " + runPlayArea);
             String playMoreCards = Console.getString("Play more cards? y/n", false);
-            if ("y".equals(playMoreCards)) {
+            String lowerPlayMoreCards = playMoreCards.toLowerCase();
+            if ("y".equals(lowerPlayMoreCards)) {
                 sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
                 layDownSet(activeHand);
@@ -233,8 +235,9 @@ public class Table {
     private void layDownSet(Hand activeHand) {
         sortHand(activeHand);
         displayPlayAreas();
-        String input = Console.getString("\nmeld set?, run? or card s/r/c:\nEnter to skip:", false);
-        switch (input) {
+        String input = Console.getString("\nmeld set?, run? or card? s/r/c:\nEnter to skip:", false);
+        String lowerInput = input.toLowerCase();
+        switch (lowerInput) {
             case "s" -> {
                 playSetCard(activeHand);
             }
@@ -249,8 +252,10 @@ public class Table {
 
     private void addCardToMeld(Hand activeHand) {
                 //get sets
+        displayPlayAreas();
         String input = Console.getString("\nmeld a card: add to set or run? s/r:", false);
-        switch (input) {
+        String lowerInput = input.toLowerCase();
+        switch (lowerInput) {
             case "s" -> {
                 sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
@@ -333,6 +338,7 @@ public class Table {
         determineWinner();
         totalRdPoints();
         String newGame = Console.getString("Would you like to start the next round? y/n",true);
+        String lowerNewGameInput = newGame.toLowerCase();
         if (newGame.equals("y")) {
          resetGame();
         }else {
