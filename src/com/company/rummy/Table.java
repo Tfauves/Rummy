@@ -238,6 +238,7 @@ public class Table {
     }
 
     private void addCardToMeld(Hand activeHand) {
+                //get sets
         String input = Console.getString("\nmeld a card: add to set or run? s/r:", false);
         switch (input) {
             case "s" -> {
@@ -254,29 +255,32 @@ public class Table {
                         break;
                     }
                 }
-                //get sets
             }
             case "r" -> {
-                sortHand(activeHand);
-                Console.showHandWithIndex(activeHand);
-                int userChoiceIndex = Console.getInt("\nselect a card to play", 1, 11, "invalid");
-                int runCardIndex = userChoiceIndex - 1;
-                Card runMeldCard = activeHand.getCards().get(runCardIndex);
-                int nextCardRank = runMeldCard.getRank() + 1;
-                activeHand.removeCard(runCardIndex);
-                for (int i = 0; i < runPlayArea.size() - 1; i++) {
-                    if (runMeldCard.getRank() == runPlayArea.get(i + 1).getRank() && runMeldCard.getSuit() == runPlayArea.get(i + 1).getSuit()) {
-                        runPlayArea.add(runMeldCard);
-                        System.out.println(runPlayArea);
-                        break;
-                    }
-                }
                 //get runs
+//                sortHand(activeHand);
+//                Console.showHandWithIndex(activeHand);
+//                int userChoiceIndex = Console.getInt("\nselect a card to play", 1, 11, "invalid");
+//                int runCardIndex = userChoiceIndex - 1;
+//                Card runMeldCard = activeHand.getCards().get(runCardIndex);
+//                int nextCardRank = runMeldCard.getRank() + 1;
+//                activeHand.removeCard(runCardIndex);
+//                for (int i = 0; i < runPlayArea.size() - 1; i++) {
+//                    //need to know if card to meld is lower or higher than the cards that begin and end the run
+//                    if (runMeldCard.getRank() == runPlayArea.get(i + 1).getRank() && runMeldCard.getSuit() == runPlayArea.get(i + 1).getSuit()) {
+//                        runPlayArea.add(runMeldCard);
+//                        System.out.println(runPlayArea);
+//                        break;
+//                    }
+//                }
+
             }
+
         }
 
     }
-
+// TODO: 10/22/2021 check for gin
+    //need to count the number of cards that a player has melded during a turn if they manage to meld 10 cards and then discard, they go gin and earn 20 bonus points.
 
     private void gamePoints() {
         for (Hand players : hands) {
