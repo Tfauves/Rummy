@@ -59,6 +59,15 @@ public class Table {
         System.out.println(outPut);
     }
 
+    private void displayPlayAreas() {
+        if (setPlayArea.size() > 0) {
+            System.out.println("current sets:" + setPlayArea);
+        }
+        if(runPlayArea.size() > 0) {
+            System.out.println("current runs:" + runPlayArea);
+        }
+    }
+
     private void playerTurn() {
             for (int count = 0; count < hands.size(); count++) {
                 Hand player = hands.get(count);
@@ -223,6 +232,7 @@ public class Table {
 
     private void layDownSet(Hand activeHand) {
         sortHand(activeHand);
+        displayPlayAreas();
         String input = Console.getString("\nmeld set?, run? or card s/r/c:\nEnter to skip:", false);
         switch (input) {
             case "s" -> {
