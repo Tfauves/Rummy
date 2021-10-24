@@ -14,7 +14,7 @@ public class Table {
     private List<Card> discardPile = new ArrayList<>();
     private int playerCount = 0;
     private boolean activeRound = false;
-    private final int HAND_CARD_AMT = 10;
+    private final int HAND_CARD_AMT = 5;
 
     public Table() {
         playerCount = Console.getInt("number of players", 1, 3, "invalid input");
@@ -110,7 +110,7 @@ public class Table {
         sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
 //        activeHand.detectRunCard();
-        layDownSet(activeHand);
+        layDownMeld(activeHand);
         return false;
     }
 
@@ -118,7 +118,7 @@ public class Table {
         activeHand.addCard(discardPile.get(discardPile.size() - 1));
         sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
-        layDownSet(activeHand);
+        layDownMeld(activeHand);
         return false;
     }
 
@@ -157,7 +157,7 @@ public class Table {
                 activeHand.addCard(cards);
                 }
                 tempList.clear();
-                layDownSet(activeHand);
+                layDownMeld(activeHand);
                 sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
                 break;
@@ -172,7 +172,7 @@ public class Table {
                 if ("y".equals(lowerPlatMoreCards)) {
                     sortHand(activeHand);
                     Console.showHandWithIndex(activeHand);
-                    layDownSet(activeHand);
+                    layDownMeld(activeHand);
                 }
 
         }
@@ -208,7 +208,7 @@ public class Table {
                 tempList.clear();
                 sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
-                layDownSet(activeHand);
+                layDownMeld(activeHand);
                 break;
             }
         }
@@ -220,7 +220,7 @@ public class Table {
             if ("y".equals(lowerPlayMoreCards)) {
                 sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
-                layDownSet(activeHand);
+                layDownMeld(activeHand);
             }
         }
 //        System.out.println(tempList);
@@ -235,7 +235,7 @@ public class Table {
         }
     }
 
-    private void layDownSet(Hand activeHand) {
+    private void layDownMeld(Hand activeHand) {
         sortHand(activeHand);
         displayPlayAreas();
         String input = Console.getString("\nmeld set?, run? or card? s/r/c:\nEnter to skip:", false);
@@ -294,11 +294,12 @@ public class Table {
 
                         if (runMeldCard.getRank() > runPlayArea.get(i).getRank()) {
                             runPlayArea.add(i + 1, runMeldCard);
-                        } else {
+                        }
+                        else {
                             System.out.println("not valid");
                             activeHand.addCard(runMeldCard);
                         }
-                        Collections.shuffle(runPlayArea);
+                        runPlayArea.sort(Comparator.comparing(Card::getRank));
                         System.out.println(runPlayArea);
                         break;
                     }
