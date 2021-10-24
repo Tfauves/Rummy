@@ -79,8 +79,8 @@ public class Table {
                        endRound();
                     }
                 }
-                Console.showHandWithIndex(player);
                 sortHand(player);
+                Console.showHandWithIndex(player);
                 int index = Console.getInt("\nEnter number to discard", 1, 11, "invalid selection");
                 discardPile.add(player.getCards().remove(index - 1));
                 Console.getString("Enter to start next turn", false);
@@ -283,17 +283,17 @@ public class Table {
                 int runCardIndex = userChoiceIndex - 1;
                 Card runMeldCard = activeHand.getCards().get(runCardIndex);
                 activeHand.removeCard(runCardIndex);
+                int nextCardRank = runMeldCard.getRank() - 1;
                 //If the rank of the players card is less than the rank of the card at index(i) insert card at index i-1.
                 // If player card is greater than index(i) insert card at index(i+1)
-                for (int i = 0; i < runPlayArea.size() - 1; i++) {
+                for (int i = 0; i < runPlayArea.size(); i++) {
                     if (runMeldCard.getSuit().equals(runPlayArea.get(i).getSuit()) ) {
                         System.out.println("suits match");
-                        if (runMeldCard.getRank() < runPlayArea.get(i).getRank()) {
-                            runPlayArea.add(i -1,runMeldCard);
+                        if (runMeldCard.getRank() < runPlayArea.get(0).getRank()) {
+                            runPlayArea.add(runMeldCard);
                         }
-
-                        if (runMeldCard.getRank() > runPlayArea.get(i).getRank()) {
-                            runPlayArea.add(i + 1, runMeldCard);
+                        if (nextCardRank == runPlayArea.get(runPlayArea.size() - 1).getRank()) {
+                                runPlayArea.add(runMeldCard);
                         }
                         else {
                             System.out.println("not valid");
