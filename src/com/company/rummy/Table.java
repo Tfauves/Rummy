@@ -277,21 +277,26 @@ public class Table {
             }
             case "r" -> {
                 //get runs
-//                sortHand(activeHand);
-//                Console.showHandWithIndex(activeHand);
-//                int userChoiceIndex = Console.getInt("\nselect a card to play", 1, 11, "invalid");
-//                int runCardIndex = userChoiceIndex - 1;
-//                Card runMeldCard = activeHand.getCards().get(runCardIndex);
-//                int nextCardRank = runMeldCard.getRank() + 1;
-//                activeHand.removeCard(runCardIndex);
-//                for (int i = 0; i < runPlayArea.size() - 1; i++) {
-//                    //need to know if card to meld is lower or higher than the cards that begin and end the run
-//                    if (runMeldCard.getRank() == runPlayArea.get(i + 1).getRank() && runMeldCard.getSuit() == runPlayArea.get(i + 1).getSuit()) {
-//                        runPlayArea.add(runMeldCard);
-//                        System.out.println(runPlayArea);
-//                        break;
-//                    }
-//                }
+                sortHand(activeHand);
+                Console.showHandWithIndex(activeHand);
+                int userChoiceIndex = Console.getInt("\nselect a card to play", 1, 11, "invalid");
+                int runCardIndex = userChoiceIndex - 1;
+                Card runMeldCard = activeHand.getCards().get(runCardIndex);
+                int nextCardRank = runMeldCard.getRank() + 1;
+                int beforeNextCard = runMeldCard.getRank() - 1;
+                activeHand.removeCard(runCardIndex);
+                for (int i = 0; i < runPlayArea.size() - 1; i++) {
+                    if (runMeldCard.getSuit().equals(runPlayArea.get(i).getSuit()) ) {
+                        System.out.println("suits match");
+                        //If the rank of the players card is less than the rank of the card at index(i) insert card at index i-1.
+                        // If player card is greater than index(i) insert card at index(i+1)
+
+
+                        runPlayArea.add(runMeldCard);
+                        System.out.println(runPlayArea);
+                        break;
+                    }
+                }
 
             }
 
