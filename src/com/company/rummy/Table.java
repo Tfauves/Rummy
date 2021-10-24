@@ -25,8 +25,8 @@ public class Table {
     }
 
     public void playGame() {
-        deck = new StandardDeck();
-//        deck = new TestDeck();
+//        deck = new StandardDeck();
+        deck = new TestDeck();
         deck.shuffle();
         gamePoints();
         deal();
@@ -282,17 +282,23 @@ public class Table {
                 int userChoiceIndex = Console.getInt("\nselect a card to play", 1, 11, "invalid");
                 int runCardIndex = userChoiceIndex - 1;
                 Card runMeldCard = activeHand.getCards().get(runCardIndex);
-                int nextCardRank = runMeldCard.getRank() + 1;
-                int beforeNextCard = runMeldCard.getRank() - 1;
                 activeHand.removeCard(runCardIndex);
+                //If the rank of the players card is less than the rank of the card at index(i) insert card at index i-1.
+                // If player card is greater than index(i) insert card at index(i+1)
                 for (int i = 0; i < runPlayArea.size() - 1; i++) {
                     if (runMeldCard.getSuit().equals(runPlayArea.get(i).getSuit()) ) {
                         System.out.println("suits match");
-                        //If the rank of the players card is less than the rank of the card at index(i) insert card at index i-1.
-                        // If player card is greater than index(i) insert card at index(i+1)
+                        if (runMeldCard.getRank() < runPlayArea.get(i).getRank()) {
+                            runPlayArea.add(i -1,runMeldCard);
+                        }
 
-
-                        runPlayArea.add(runMeldCard);
+                        if (runMeldCard.getRank() > runPlayArea.get(i).getRank()) {
+                            runPlayArea.add(i + 1, runMeldCard);
+                        } else {
+                            System.out.println("not valid");
+                            activeHand.addCard(runMeldCard);
+                        }
+                        Collections.shuffle(runPlayArea);
                         System.out.println(runPlayArea);
                         break;
                     }
