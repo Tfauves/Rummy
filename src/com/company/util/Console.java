@@ -46,5 +46,14 @@ public class Console {
         }
     }
 
+    public static void spaces() {
+        int spaceCounter = 0;
+        while (spaceCounter < 33) {
+
+            System.out.println();
+            spaceCounter++;
+        }
+    }
+
 
 }

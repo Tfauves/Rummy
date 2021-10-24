@@ -14,6 +14,7 @@ public class Table {
     private List<Card> discardPile = new ArrayList<>();
     private int playerCount = 0;
     private boolean activeRound = false;
+    private final int HAND_CARD_AMT = 10;
 
     public Table() {
         playerCount = Console.getInt("number of players", 1, 3, "invalid input");
@@ -24,8 +25,8 @@ public class Table {
     }
 
     public void playGame() {
-//        deck = new StandardDeck();
-        deck = new TestDeck();
+        deck = new StandardDeck();
+//        deck = new TestDeck();
         deck.shuffle();
         gamePoints();
         deal();
@@ -43,7 +44,7 @@ public class Table {
     }
 
     public void deal() {
-        for (int count = 0; count < 4; count++) {
+        for (int count = 0; count < HAND_CARD_AMT; count++) {
             for (Hand player : hands) {
                 player.addCard(deck.draw());
             }
@@ -83,6 +84,7 @@ public class Table {
                 int index = Console.getInt("\nEnter number to discard", 1, 11, "invalid selection");
                 discardPile.add(player.getCards().remove(index - 1));
                 Console.getString("Enter to start next turn", false);
+                Console.spaces();
             }
     }
 
@@ -101,6 +103,7 @@ public class Table {
     }
 
     private boolean draw(Hand activeHand) {
+        Console.spaces();
         Card newCard = deck.draw();
         System.out.println("You drew a " + newCard.display());
         activeHand.addCard(newCard);
@@ -248,6 +251,7 @@ public class Table {
                 addCardToMeld(activeHand);
             }
         }
+        Console.spaces();
     }
 
     private void addCardToMeld(Hand activeHand) {
@@ -300,6 +304,7 @@ public class Table {
     private void gamePoints() {
         for (Hand players : hands) {
             System.out.println(players.getHolder().getName() + "Score: " + players.getHolder().getPoints());
+            System.out.println();
             if (players.getHolder().getPoints() >= 100) {
                 System.out.println(players.getHolder().getName() + "Wins the game");
                 System.exit(200);

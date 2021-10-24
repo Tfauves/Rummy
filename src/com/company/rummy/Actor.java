@@ -8,6 +8,8 @@ public interface Actor {
 
     String getName();
     int getPoints();
+    boolean canGoGin = true;
     void setPoints(int points);
     int getAction(Hand hand);
+    boolean getCanGoGin();
 }

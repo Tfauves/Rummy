@@ -9,6 +9,7 @@ public class Player implements Actor {
     private final String name;
     private int points = 0;
     private int actionsCount;
+    public boolean canGoGin = true;
 
     public Player(String name, int points) {
         this.name = name;
@@ -26,6 +27,7 @@ public class Player implements Actor {
     public String getAvailableActions(Hand hand) {
         actionsCount = 3;
         StringBuilder outPut = new StringBuilder();
+        System.out.println("------------------------------------------------");
         outPut.append("1. Draw from deck\n2. Pick up discarded card\n3. Sort");
         int deadWood = hand.sumHand();
         if (deadWood <= 10) {
@@ -48,5 +50,13 @@ public class Player implements Actor {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public boolean getCanGoGin() {
+        return canGoGin;
+    }
+
+    public void setCanGoGin(boolean canGoGin) {
+        this.canGoGin = canGoGin;
     }
 }
