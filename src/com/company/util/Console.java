@@ -41,6 +41,8 @@ public class Console {
 
     public static void showHandWithIndex(Hand activeHand) {
         System.out.println(activeHand.displayHand());
+        System.out.println("--------------------------------------------------------");
+//        System.out.println("               Card Selection Index"                     );
         for (int i = 1; i < activeHand.getCards().size() + 1; i++) {
             System.out.print(i + "    ");
         }

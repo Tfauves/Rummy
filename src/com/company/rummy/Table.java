@@ -13,7 +13,7 @@ public class Table {
     private List<Card> runPlayArea = new ArrayList<>();
     private List<Card> discardPile = new ArrayList<>();
     private boolean activeRound = false;
-    private final int HAND_CARD_AMT = 4;
+    private final int HAND_CARD_AMT = 10;
 
     public Table() {
         int playerCount = Console.getInt("number of players", 1, 3, "invalid input");
@@ -24,9 +24,15 @@ public class Table {
         Console.spaces();
     }
 
+//    public void setPlayAreaDisplay() {
+//        for (Card card : setPlayArea) {
+//            card.display();
+//        }
+//    }
+
     public void playGame() {
-//      deck = new StandardDeck();
-      deck = new TestDeck();
+      deck = new StandardDeck();
+//      deck = new TestDeck();
         deck.shuffle();
         gamePoints();
         deal();
@@ -60,6 +66,7 @@ public class Table {
         System.out.println(outPut);
     }
 
+    // TODO: 10/24/2021 toString method for set and run play areas.
     private void displayPlayAreas() {
         if (setPlayArea.size() > 0) {
             System.out.println("\ncurrent sets:" + setPlayArea);
