@@ -41,7 +41,7 @@ public class Table {
     }
 
     public void playGame() {
-//      deck = new StandardDeck();
+      deck = new StandardDeck();
       deck = new TestDeck();
         deck.shuffle();
         gamePoints();
@@ -51,7 +51,6 @@ public class Table {
 
     public void playARound() {
         activeRound = true;
-//        deck.replenishDeck(discardPile);
        while (activeRound) {
             playerTurn();
             goneOut();
@@ -76,7 +75,6 @@ public class Table {
         System.out.println(outPut);
     }
 
-    // TODO: 10/24/2021 toString method for set and run play areas.
     private void displayPlayAreas() {
         if (setPlayArea.size() > 0) {
             System.out.println("\ncurrent sets: " + setPlayAreaDisplay());
@@ -140,7 +138,6 @@ public class Table {
         activeHand.addCard(newCard);
         sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
-//        activeHand.detectRunCard();
         layDownMeld(activeHand);
         return false;
     }
@@ -241,19 +238,7 @@ public class Table {
                 Console.showHandWithIndex(activeHand);
                 layDownMeld(activeHand);
                 break;
-//
             }
-//            else {
-//                System.out.println("not a match");
-//                for (Card cards : tempList) {
-//                    activeHand.addCard(cards);
-//                }
-//                tempList.clear();
-//                sortHand(activeHand);
-//                Console.showHandWithIndex(activeHand);
-//                layDownMeld(activeHand);
-//                break;
-//            }
         }
         runPlayArea.addAll(tempList);
         if (runPlayArea.size() > 0) {
@@ -266,7 +251,6 @@ public class Table {
                 layDownMeld(activeHand);
             }
         }
-//        System.out.println(tempList);
     }
 
     private void goneOut() {
@@ -361,8 +345,6 @@ public class Table {
         }
 
     }
-// TODO: 10/22/2021 check for gin
-    //need to count the number of cards that a player has melded during a turn if they manage to meld 10 cards and then discard, they go gin and earn 20 bonus points.
 
     private void gamePoints() {
         for (Hand players : hands) {
@@ -383,12 +365,12 @@ public class Table {
           if (player1HandPoints < player2HandPoints) {
                totalRdPoints = player2HandPoints - player1HandPoints;
               hands.get(i).getHolder().setPoints(hands.get(i).getHolder().getPoints() + totalRdPoints);
+
           } else {
               totalRdPoints =  player1HandPoints - player2HandPoints ;
               hands.get(i + 1).getHolder().setPoints( hands.get(i + 1).getHolder().getPoints() + totalRdPoints);
           }
-          System.out.println(hands.get(i).getHolder().getName() + hands.get(i).getHolder().getPoints());
-
+          System.out.println(totalRdPoints + " round points awarded to " + hands.get(i).getHolder().getName());
       }
 
     }
