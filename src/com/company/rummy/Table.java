@@ -12,16 +12,16 @@ public class Table {
     private List<Card> setPlayArea = new ArrayList<>();
     private List<Card> runPlayArea = new ArrayList<>();
     private List<Card> discardPile = new ArrayList<>();
-    private int playerCount = 0;
     private boolean activeRound = false;
-    private final int HAND_CARD_AMT = 5;
+    private final int HAND_CARD_AMT = 4;
 
     public Table() {
-        playerCount = Console.getInt("number of players", 1, 3, "invalid input");
+        int playerCount = Console.getInt("number of players", 1, 3, "invalid input");
         for (int count = 0; count < playerCount; count++) {
             Player newPlayer = new Player("Player" + (count + 1) + ": ");
             hands.add(new Hand(newPlayer));
         }
+        Console.spaces();
     }
 
     public void playGame() {
@@ -70,6 +70,7 @@ public class Table {
     }
 
     private void playerTurn() {
+        boolean getInput = true;
             for (int count = 0; count < hands.size(); count++) {
                 Hand player = hands.get(count);
                 player.displayHand();
@@ -81,15 +82,26 @@ public class Table {
                 }
                 sortHand(player);
                 Console.showHandWithIndex(player);
-                int index = Console.getInt("\nEnter number to discard", 1, 11, "invalid selection");
-                discardPile.add(player.getCards().remove(index - 1));
+                while (getInput) {
+                    int index = Console.getInt("\nEnter number to discard", 1, 11, "invalid selection");
+                    try {
+                        discardPile.add(player.getCards().remove(index - 1));
+                        getInput = false;
+
+                    }catch (IndexOutOfBoundsException err) {
+                        System.out.println("invalid selection");
+                    }
+
+
+                }
                 Console.getString("Enter to start next turn", false);
                 Console.spaces();
             }
     }
 
     private boolean turn(Hand activeHand) {
-        System.out.println(discardPile.get(discardPile.size() - 1).display());
+        System.out.println("Discard Pile | " + discardPile.get(discardPile.size() - 1).display());
+        System.out.println();
         System.out.println(activeHand.getName());
         int action = activeHand.getAction();
         return switch (action) {
@@ -106,6 +118,7 @@ public class Table {
         Console.spaces();
         Card newCard = deck.draw();
         System.out.println("You drew a " + newCard.display());
+        System.out.println();
         activeHand.addCard(newCard);
         sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
@@ -185,12 +198,15 @@ public class Table {
         while (tempList.size() < meldSize) {
             sortHand(activeHand);
             Console.showHandWithIndex(activeHand);
-            int userInput = Console.getInt("\nEnter card to play", 1, 11, "invalid selection");
-            int cardIndex = userInput - 1;
-            runCard = activeHand.getCards().get(cardIndex);
-            tempList.add(runCard);
-            //could result in crash.
-            activeHand.removeCard(cardIndex);
+                int userInput = Console.getInt("\nEnter card to play", 1, activeHand.getCards().size(), "invalid selection");
+                try {
+                    int cardIndex = userInput - 1;
+                    runCard = activeHand.getCards().get(cardIndex);
+                    tempList.add(runCard);
+                    activeHand.removeCard(cardIndex);
+                } catch (IndexOutOfBoundsException err) {
+                    System.out.println("invalid selection");
+                }
         }
 
         for (int i = 0; i < tempList.size() -1; i++) {
