@@ -13,7 +13,7 @@ public class Table {
     private List<Card> runPlayArea = new ArrayList<>();
     private List<Card> discardPile = new ArrayList<>();
     private boolean activeRound = false;
-    private final int HAND_CARD_AMT = 10;
+    private final int HAND_CARD_AMT = 5;
 
     public Table() {
         int playerCount = Console.getInt("number of players", 1, 2, "invalid input");
@@ -32,9 +32,17 @@ public class Table {
         return sets;
     }
 
+    public StringBuilder runPlayAreaDisplay() {
+        StringBuilder runs = new StringBuilder();
+        for (Card card : runPlayArea) {
+            runs.append(card.display()).append(" ");
+        }
+        return runs;
+    }
+
     public void playGame() {
-      deck = new StandardDeck();
-//      deck = new TestDeck();
+//      deck = new StandardDeck();
+      deck = new TestDeck();
         deck.shuffle();
         gamePoints();
         deal();
@@ -74,7 +82,7 @@ public class Table {
             System.out.println("\ncurrent sets: " + setPlayAreaDisplay());
         }
         if(runPlayArea.size() > 0) {
-            System.out.println("\ncurrent runs:" + runPlayArea);
+            System.out.println("\ncurrent runs: " + runPlayAreaDisplay());
         }
     }
 
@@ -249,7 +257,7 @@ public class Table {
         }
         runPlayArea.addAll(tempList);
         if (runPlayArea.size() > 0) {
-            System.out.println("current runs played: " + runPlayArea);
+            System.out.println("current runs played: " + runPlayAreaDisplay());
             String playMoreCards = Console.getString("Play more cards? y/n", false);
             String lowerPlayMoreCards = playMoreCards.toLowerCase();
             if ("y".equals(lowerPlayMoreCards)) {
@@ -343,7 +351,7 @@ public class Table {
                             activeHand.addCard(runMeldCard);
                         }
                         runPlayArea.sort(Comparator.comparing(Card::getRank));
-                        System.out.println(runPlayArea);
+                        System.out.println(runPlayAreaDisplay());
                         break;
                     }
                 }
