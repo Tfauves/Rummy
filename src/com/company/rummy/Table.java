@@ -25,8 +25,8 @@ public class Table {
     }
 
     public void playGame() {
-//        deck = new StandardDeck();
-        deck = new TestDeck();
+//      deck = new StandardDeck();
+      deck = new TestDeck();
         deck.shuffle();
         gamePoints();
         deal();
@@ -213,10 +213,7 @@ public class Table {
             int cardRank = tempList.get(i).getRank();
             String cardSuit = tempList.get(i).getSuit();
             int nextRunCardRank = cardRank + 1;
-            if (tempList.get(i + 1).getRank() == nextRunCardRank && tempList.get(i + 1).getSuit().equals(cardSuit)) {
-                System.out.println("good run");
-            }
-            else {
+            if (tempList.get(i + 1).getRank() != nextRunCardRank || !tempList.get(i + 1).getSuit().equals(cardSuit)) {
                 System.out.println("not a match");
                 for (Card cards : tempList) {
                     activeHand.addCard(cards);
@@ -226,7 +223,19 @@ public class Table {
                 Console.showHandWithIndex(activeHand);
                 layDownMeld(activeHand);
                 break;
+//
             }
+//            else {
+//                System.out.println("not a match");
+//                for (Card cards : tempList) {
+//                    activeHand.addCard(cards);
+//                }
+//                tempList.clear();
+//                sortHand(activeHand);
+//                Console.showHandWithIndex(activeHand);
+//                layDownMeld(activeHand);
+//                break;
+//            }
         }
         runPlayArea.addAll(tempList);
         if (runPlayArea.size() > 0) {
@@ -277,6 +286,10 @@ public class Table {
         String lowerInput = input.toLowerCase();
         switch (lowerInput) {
             case "s" -> {
+                if (setPlayArea.size() == 0) {
+                    System.out.println("not valid");
+                    break;
+                }
                 sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
                 int userCardChoiceIndex = Console.getInt("\nselect a card to play", 1, 11, "invalid");
@@ -293,6 +306,10 @@ public class Table {
             }
             case "r" -> {
                 //get runs
+                if (runPlayArea.size() == 0) {
+                    System.out.println("not valid");
+                    break;
+                }
                 sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
                 int userChoiceIndex = Console.getInt("\nselect a card to play", 1, 11, "invalid");
