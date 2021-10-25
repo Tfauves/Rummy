@@ -101,7 +101,8 @@ public class Table {
 
 
                 }
-                Console.getString("Enter to start next turn", false);
+                Console.getString("\nEnter to start next turn", false);
+                getInput = true;
                 Console.spaces();
             }
     }
