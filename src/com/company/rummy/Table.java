@@ -16,7 +16,7 @@ public class Table {
     private final int HAND_CARD_AMT = 10;
 
     public Table() {
-        int playerCount = Console.getInt("number of players", 1, 3, "invalid input");
+        int playerCount = Console.getInt("number of players", 1, 2, "invalid input");
         for (int count = 0; count < playerCount; count++) {
             Player newPlayer = new Player("Player" + (count + 1) + ": ");
             hands.add(new Hand(newPlayer));
@@ -24,11 +24,13 @@ public class Table {
         Console.spaces();
     }
 
-//    public void setPlayAreaDisplay() {
-//        for (Card card : setPlayArea) {
-//            card.display();
-//        }
-//    }
+    public StringBuilder setPlayAreaDisplay() {
+        StringBuilder sets = new StringBuilder();
+        for (Card card : setPlayArea) {
+            sets.append(card.display()).append(" ");
+        }
+        return sets;
+    }
 
     public void playGame() {
       deck = new StandardDeck();
@@ -69,7 +71,7 @@ public class Table {
     // TODO: 10/24/2021 toString method for set and run play areas.
     private void displayPlayAreas() {
         if (setPlayArea.size() > 0) {
-            System.out.println("\ncurrent sets:" + setPlayArea);
+            System.out.println("\ncurrent sets: " + setPlayAreaDisplay());
         }
         if(runPlayArea.size() > 0) {
             System.out.println("\ncurrent runs:" + runPlayArea);
@@ -159,7 +161,7 @@ public class Table {
     private void playSetCard(Hand activeHand) {
         List<Card> tempList = new ArrayList<>();
         int meldSize = Console.getInt("Total meld size (3 or 4)", 3, 4, "invalid input");
-        int userInput = Console.getInt("\nStarting set cards location?", 1, 11, "invalid");
+        int userInput = Console.getInt("\nStarting set card location?", 1, 11, "invalid");
         while (tempList.size() < meldSize) {
             sortHand(activeHand);
             int index = userInput - 1;
@@ -187,7 +189,7 @@ public class Table {
         }
         setPlayArea.addAll(tempList);
         if (setPlayArea.size() > 0) {
-            System.out.println("current sets played: " + setPlayArea);
+            System.out.println("current sets played: " + setPlayAreaDisplay());
             String playMoreCards = Console.getString("Play more cards? y/n", false);
             String lowerPlatMoreCards = playMoreCards.toLowerCase();
                 if ("y".equals(lowerPlatMoreCards)) {
@@ -307,7 +309,7 @@ public class Table {
                 for (int i = 0; i < setPlayArea.size(); i++) {
                     if (meldCard.getRank() == setPlayArea.get(i).getRank()) {
                         setPlayArea.add(meldCard);
-                        System.out.println(setPlayArea);
+                        System.out.println(setPlayAreaDisplay());
                         break;
                     }
                 }
