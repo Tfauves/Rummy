@@ -13,7 +13,7 @@ public class Table {
     private List<Card> runPlayArea = new ArrayList<>();
     private List<Card> discardPile = new ArrayList<>();
     private boolean activeRound = false;
-    private final int HAND_CARD_AMT = 5;
+    private final int HAND_CARD_AMT = 10;
 
     public Table() {
         int playerCount = Console.getInt("number of players", 1, 2, "invalid input");
@@ -42,7 +42,7 @@ public class Table {
 
     public void playGame() {
       deck = new StandardDeck();
-      deck = new TestDeck();
+//      deck = new TestDeck();
         deck.shuffle();
         gamePoints();
         deal();
@@ -77,7 +77,7 @@ public class Table {
 
     private void displayPlayAreas() {
         if (setPlayArea.size() > 0) {
-            System.out.println("\ncurrent sets: " + setPlayAreaDisplay());
+            System.out.println("\n\ncurrent sets: " + setPlayAreaDisplay());
         }
         if(runPlayArea.size() > 0) {
             System.out.println("\ncurrent runs: " + runPlayAreaDisplay());
@@ -194,7 +194,7 @@ public class Table {
         }
         setPlayArea.addAll(tempList);
         if (setPlayArea.size() > 0) {
-            System.out.println("current sets played: " + setPlayAreaDisplay());
+            System.out.println("\ncurrent sets played: " + setPlayAreaDisplay());
             String playMoreCards = Console.getString("Play more cards? y/n", false);
             String lowerPlatMoreCards = playMoreCards.toLowerCase();
                 if ("y".equals(lowerPlatMoreCards)) {
@@ -242,7 +242,7 @@ public class Table {
         }
         runPlayArea.addAll(tempList);
         if (runPlayArea.size() > 0) {
-            System.out.println("current runs played: " + runPlayAreaDisplay());
+            System.out.println("\ncurrent runs played: " + runPlayAreaDisplay());
             String playMoreCards = Console.getString("Play more cards? y/n", false);
             String lowerPlayMoreCards = playMoreCards.toLowerCase();
             if ("y".equals(lowerPlayMoreCards)) {
@@ -301,6 +301,7 @@ public class Table {
                 for (int i = 0; i < setPlayArea.size(); i++) {
                     if (meldCard.getRank() == setPlayArea.get(i).getRank()) {
                         setPlayArea.add(meldCard);
+                        setPlayArea.sort(Comparator.comparing(Card::getRank));
                         System.out.println(setPlayAreaDisplay());
                         break;
                     }
@@ -365,12 +366,13 @@ public class Table {
           if (player1HandPoints < player2HandPoints) {
                totalRdPoints = player2HandPoints - player1HandPoints;
               hands.get(i).getHolder().setPoints(hands.get(i).getHolder().getPoints() + totalRdPoints);
+              System.out.println(totalRdPoints + " round points awarded to " + hands.get(i).getHolder().getName());
 
           } else {
               totalRdPoints =  player1HandPoints - player2HandPoints ;
               hands.get(i + 1).getHolder().setPoints( hands.get(i + 1).getHolder().getPoints() + totalRdPoints);
+              System.out.println(totalRdPoints + " round points awarded to " + hands.get(i + 1).getHolder().getName());
           }
-          System.out.println(totalRdPoints + " round points awarded to " + hands.get(i).getHolder().getName());
       }
 
     }
@@ -390,7 +392,8 @@ public class Table {
         String newGame = Console.getString("Would you like to start the next round? y/n",true);
         String lowerNewGameInput = newGame.toLowerCase();
         if (newGame.equals("y")) {
-         resetGame();
+            Console.spaces();
+            resetGame();
         }else {
             gamePoints();
             System.out.println("thanks for playing");
