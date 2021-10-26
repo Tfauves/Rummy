@@ -99,7 +99,6 @@ public class Table {
                        endRound();
                     }
                 }
-//                meld(player);
                 player.sortHand(player);
                 Console.showHandWithIndex(player);
                 while (getInput) {
@@ -150,7 +149,7 @@ public class Table {
         activeHand.addCard(newCard);
         activeHand.sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
-       layDownMeld(activeHand);
+        layDownMeld(activeHand);
         return false;
     }
 
