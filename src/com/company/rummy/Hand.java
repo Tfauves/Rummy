@@ -5,6 +5,7 @@ import com.company.deck.PlayingCard;
 import com.company.util.Console;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Hand {
@@ -22,6 +23,11 @@ public class Hand {
 
     public Card removeCard(int index) {
         return cards.remove(index);
+    }
+
+    public boolean sortHand(Hand activeHand) {
+        activeHand.cards.sort(Comparator.comparing(Card::getRank));
+        return true;
     }
 
     public int sumHand() {

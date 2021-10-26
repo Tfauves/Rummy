@@ -95,7 +95,7 @@ public class Table {
                        endRound();
                     }
                 }
-                sortHand(player);
+                player.sortHand(player);
                 Console.showHandWithIndex(player);
                 while (getInput) {
                     int index = Console.getInt("\nEnter number to discard", 1, 11, "invalid selection");
@@ -123,7 +123,7 @@ public class Table {
         return switch (action) {
             case Actor.DRAW -> draw(activeHand);
             case Actor.DISCARD_DRAW -> drawDiscardedCard(activeHand);
-            case Actor.SORT -> sortHand(activeHand);
+            case Actor.SORT -> activeHand.sortHand(activeHand);
             case Actor.KNOCK -> knock(activeHand);
             default -> false;
         };
@@ -136,7 +136,7 @@ public class Table {
         System.out.println("You drew a " + newCard.display());
         System.out.println();
         activeHand.addCard(newCard);
-        sortHand(activeHand);
+        activeHand.sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
         layDownMeld(activeHand);
         return false;
@@ -144,16 +144,16 @@ public class Table {
 
     private boolean drawDiscardedCard(Hand activeHand) {
         activeHand.addCard(discardPile.get(discardPile.size() - 1));
-        sortHand(activeHand);
+        activeHand.sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
         layDownMeld(activeHand);
         return false;
     }
 
-    private boolean sortHand(Hand activeHand) {
-        activeHand.getCards().sort(Comparator.comparing(Card::getRank));
-        return true;
-    }
+//    private boolean sortHand(Hand activeHand) {
+//        activeHand.getCards().sort(Comparator.comparing(Card::getRank));
+//        return true;
+//    }
 
     private boolean knock(Hand activeHand) {
         activeRound = false;
@@ -168,7 +168,7 @@ public class Table {
         int meldSize = Console.getInt("Total meld size (3 or 4)", 3, 4, "invalid input");
         int userInput = Console.getInt("\nStarting set card location?", 1, 11, "invalid");
         while (tempList.size() < meldSize) {
-            sortHand(activeHand);
+            activeHand.sortHand(activeHand);
             int index = userInput - 1;
             Card meldCard = activeHand.getCards().get(index);
             if (tempList.size() == 0) {
@@ -186,7 +186,7 @@ public class Table {
                 }
                 tempList.clear();
                 layDownMeld(activeHand);
-                sortHand(activeHand);
+                activeHand.sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
                 break;
             }
@@ -198,7 +198,7 @@ public class Table {
             String playMoreCards = Console.getString("Play more cards? y/n", false);
             String lowerPlatMoreCards = playMoreCards.toLowerCase();
                 if ("y".equals(lowerPlatMoreCards)) {
-                    sortHand(activeHand);
+                    activeHand.sortHand(activeHand);
                     Console.showHandWithIndex(activeHand);
                     layDownMeld(activeHand);
                 }
@@ -211,7 +211,7 @@ public class Table {
         Card runCard;
         int meldSize = Console.getInt("select number of cards to meld (3 or 4)", 3, 4, "invalid input");
         while (tempList.size() < meldSize) {
-            sortHand(activeHand);
+            activeHand.sortHand(activeHand);
             Console.showHandWithIndex(activeHand);
                 int userInput = Console.getInt("\nEnter card to play", 1, activeHand.getCards().size(), "invalid selection");
                 try {
@@ -234,7 +234,7 @@ public class Table {
                     activeHand.addCard(cards);
                 }
                 tempList.clear();
-                sortHand(activeHand);
+                activeHand.sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
                 layDownMeld(activeHand);
                 break;
@@ -246,7 +246,7 @@ public class Table {
             String playMoreCards = Console.getString("Play more cards? y/n", false);
             String lowerPlayMoreCards = playMoreCards.toLowerCase();
             if ("y".equals(lowerPlayMoreCards)) {
-                sortHand(activeHand);
+                activeHand.sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
                 layDownMeld(activeHand);
             }
@@ -263,7 +263,7 @@ public class Table {
     }
 
     private void layDownMeld(Hand activeHand) {
-        sortHand(activeHand);
+        activeHand.sortHand(activeHand);
         displayPlayAreas();
         String input = Console.getString("\nmeld set?, run? or card? s/r/c:\nEnter to skip:", false);
         String lowerInput = input.toLowerCase();
@@ -292,7 +292,7 @@ public class Table {
                     System.out.println("not valid");
                     break;
                 }
-                sortHand(activeHand);
+                activeHand.sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
                 int userCardChoiceIndex = Console.getInt("\nselect a card to play", 1, 11, "invalid");
                 int meldCardIndex = userCardChoiceIndex - 1;
@@ -313,7 +313,7 @@ public class Table {
                     System.out.println("not valid");
                     break;
                 }
-                sortHand(activeHand);
+                activeHand.sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
                 int userChoiceIndex = Console.getInt("\nselect a card to play", 1, 11, "invalid");
                 int runCardIndex = userChoiceIndex - 1;
