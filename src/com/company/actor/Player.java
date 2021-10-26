@@ -39,13 +39,12 @@ public class Player implements Actor {
 
     public String availableMeldAction(Hand hand) {
         StringBuilder output = new StringBuilder();
-        output.append("Meld type:\n1. Set\n2. Run\n3. Play a Card");
+        output.append("\nMeld type:\n1. Set\n2. Run\n3. Play a Card");
         return output.toString();
     }
 
     public int getMeldAction(Hand hand) {
-        hand.sortHand(hand);
-        Console.showHandWithIndex(hand);
+
         return Console.getInt(availableMeldAction(hand),1, 3, "invalid");
     }
 

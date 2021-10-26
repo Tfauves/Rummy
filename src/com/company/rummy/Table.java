@@ -95,6 +95,7 @@ public class Table {
                        endRound();
                     }
                 }
+                meld(player);
                 player.sortHand(player);
                 Console.showHandWithIndex(player);
                 while (getInput) {
@@ -134,7 +135,7 @@ public class Table {
         return switch (meldAction) {
             case Actor.SET -> playSetCard(activeHand);
             case Actor.RUN -> playRunCard(activeHand);
-            case Actor.PLAY_CARD ->  addCardToMeld(activeHand);
+            case Actor.PLAY_CARD -> addCardToMeld(activeHand);
             default -> false;
         };
     }
@@ -147,7 +148,7 @@ public class Table {
         activeHand.addCard(newCard);
         activeHand.sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
-        layDownMeld(activeHand);
+//        layDownMeld(activeHand);
         return false;
     }
 
@@ -155,7 +156,7 @@ public class Table {
         activeHand.addCard(discardPile.get(discardPile.size() - 1));
         activeHand.sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
-        layDownMeld(activeHand);
+//        layDownMeld(activeHand);
         return false;
     }
 
@@ -194,7 +195,7 @@ public class Table {
                 activeHand.addCard(cards);
                 }
                 tempList.clear();
-                layDownMeld(activeHand);
+//                layDownMeld(activeHand);
                 activeHand.sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
                 break;
@@ -209,11 +210,11 @@ public class Table {
                 if ("y".equals(lowerPlatMoreCards)) {
                     activeHand.sortHand(activeHand);
                     Console.showHandWithIndex(activeHand);
-                    layDownMeld(activeHand);
+//                    layDownMeld(activeHand);
                 }
 
         }
-        return true;
+        return false;
     }
 
     private boolean playRunCard(Hand activeHand) {
@@ -246,7 +247,7 @@ public class Table {
                 tempList.clear();
                 activeHand.sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
-                layDownMeld(activeHand);
+//                layDownMeld(activeHand);
                 break;
             }
         }
@@ -258,10 +259,10 @@ public class Table {
             if ("y".equals(lowerPlayMoreCards)) {
                 activeHand.sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
-                layDownMeld(activeHand);
+//                layDownMeld(activeHand);
             }
         }
-        return true;
+        return false;
     }
 
     private void goneOut() {
@@ -273,24 +274,24 @@ public class Table {
         }
     }
 
-    private void layDownMeld(Hand activeHand) {
-        activeHand.sortHand(activeHand);
-        displayPlayAreas();
-        String input = Console.getString("\nmeld set?, run? or card? s/r/c:\nEnter to skip:", false);
-        String lowerInput = input.toLowerCase();
-        switch (lowerInput) {
-            case "s" -> {
-                playSetCard(activeHand);
-            }
-            case "r" -> {
-                playRunCard(activeHand);
-            }
-            case "c" -> {
-                addCardToMeld(activeHand);
-            }
-        }
-        Console.spaces();
-    }
+//    private void layDownMeld(Hand activeHand) {
+//        activeHand.sortHand(activeHand);
+//        displayPlayAreas();
+//        String input = Console.getString("\nmeld set?, run? or card? s/r/c:\nEnter to skip:", false);
+//        String lowerInput = input.toLowerCase();
+//        switch (lowerInput) {
+//            case "s" -> {
+//                playSetCard(activeHand);
+//            }
+//            case "r" -> {
+//                playRunCard(activeHand);
+//            }
+//            case "c" -> {
+//                addCardToMeld(activeHand);
+//            }
+//        }
+//        Console.spaces();
+//    }
 
     private boolean addCardToMeld(Hand activeHand) {
                 //get sets
@@ -355,7 +356,7 @@ public class Table {
             }
 
         }
-        return true;
+        return false;
     }
 
     private void gamePoints() {
