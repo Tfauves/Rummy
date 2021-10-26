@@ -13,7 +13,7 @@ public class Table {
     private List<Card> runPlayArea = new ArrayList<>();
     private List<Card> discardPile = new ArrayList<>();
     private boolean activeRound = false;
-    private final int HAND_CARD_AMT = 10;
+    private final int HAND_CARD_AMT = 5;
 
     public Table() {
         int playerCount = Console.getInt("number of players", 1, 2, "invalid input");
@@ -24,25 +24,9 @@ public class Table {
         Console.spaces();
     }
 
-    public String setPlayAreaDisplay() {
-        StringBuilder sets = new StringBuilder();
-        for (Card card : setPlayArea) {
-            sets.append(card.display()).append(" ");
-        }
-        return sets.toString();
-    }
-
-    public String runPlayAreaDisplay() {
-        StringBuilder runs = new StringBuilder();
-        for (Card card : runPlayArea) {
-            runs.append(card.display()).append(" ");
-        }
-        return runs.toString();
-    }
-
     public void playGame() {
-      deck = new StandardDeck();
-//      deck = new TestDeck();
+//      deck = new StandardDeck();
+      deck = new TestDeck();
         deck.shuffle();
         gamePoints();
         deal();
@@ -57,6 +41,7 @@ public class Table {
         }
        endRound();
     }
+
     public void deal() {
         for (int count = 0; count < HAND_CARD_AMT; count++) {
             for (Hand player : hands) {
@@ -65,6 +50,7 @@ public class Table {
         }
         discardPile.add(deck.draw());
     }
+
 
  //Display Methods
     public void displayTable() {
@@ -83,6 +69,23 @@ public class Table {
             System.out.println("\ncurrent runs: " + runPlayAreaDisplay());
         }
     }
+
+    public String setPlayAreaDisplay() {
+        StringBuilder sets = new StringBuilder();
+        for (Card card : setPlayArea) {
+            sets.append(card.display()).append(" ");
+        }
+        return sets.toString();
+    }
+
+    public String runPlayAreaDisplay() {
+        StringBuilder runs = new StringBuilder();
+        for (Card card : runPlayArea) {
+            runs.append(card.display()).append(" ");
+        }
+        return runs.toString();
+    }
+
 
     //Turn Actions
     private void playerTurn() {
@@ -108,8 +111,6 @@ public class Table {
                     }catch (IndexOutOfBoundsException err) {
                         System.out.println("invalid selection");
                     }
-
-
                 }
                 Console.getString("\nEnter to start next turn", false);
                 getInput = true;
@@ -154,6 +155,7 @@ public class Table {
     }
 
     private boolean drawDiscardedCard(Hand activeHand) {
+        Console.spaces();
         activeHand.addCard(discardPile.get(discardPile.size() - 1));
         activeHand.sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
@@ -207,13 +209,13 @@ public class Table {
                 if ("y".equals(lowerPlatMoreCards)) {
                     activeHand.sortHand(activeHand);
                     Console.showHandWithIndex(activeHand);
-//                    layDownMeld(activeHand);
+                    layDownMeld(activeHand);
                 }
 
         }
     }
 
-    private boolean playRunCard(Hand activeHand) {
+    private void playRunCard(Hand activeHand) {
         List<Card> tempList = new ArrayList<>();
         Card runCard;
         int meldSize = Console.getInt("select number of cards to meld (3 or 4)", 3, 4, "invalid input");
@@ -258,9 +260,7 @@ public class Table {
                 layDownMeld(activeHand);
             }
         }
-        return false;
     }
-
 
     private void layDownMeld(Hand activeHand) {
         displayPlayAreas();
@@ -272,7 +272,7 @@ public class Table {
         Console.spaces();
     }
 
-    private boolean addCardToMeld(Hand activeHand) {
+    private void addCardToMeld(Hand activeHand) {
                 //get sets
         displayPlayAreas();
         String input = Console.getString("\nmeld a card: add to set or run? s/r:", false);
@@ -322,7 +322,7 @@ public class Table {
                         if (nextCardRank == runPlayArea.get(runPlayArea.size() - 1).getRank()) {
                                 runPlayArea.add(runMeldCard);
                         }
-                        else {
+                        else if (!runMeldCard.getSuit().equals(runPlayArea.get(i).getSuit())){
                             System.out.println("not valid");
                             activeHand.addCard(runMeldCard);
                         }
@@ -335,8 +335,8 @@ public class Table {
             }
 
         }
-        return false;
     }
+
 
     //Rounds, scoring and game end.
     private void goneOut() {
