@@ -24,20 +24,20 @@ public class Table {
         Console.spaces();
     }
 
-    public StringBuilder setPlayAreaDisplay() {
+    public String setPlayAreaDisplay() {
         StringBuilder sets = new StringBuilder();
         for (Card card : setPlayArea) {
             sets.append(card.display()).append(" ");
         }
-        return sets;
+        return sets.toString();
     }
 
-    public StringBuilder runPlayAreaDisplay() {
+    public String runPlayAreaDisplay() {
         StringBuilder runs = new StringBuilder();
         for (Card card : runPlayArea) {
             runs.append(card.display()).append(" ");
         }
-        return runs;
+        return runs.toString();
     }
 
     public void playGame() {
