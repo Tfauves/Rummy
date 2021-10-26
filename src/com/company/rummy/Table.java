@@ -13,7 +13,7 @@ public class Table {
     private List<Card> runPlayArea = new ArrayList<>();
     private List<Card> discardPile = new ArrayList<>();
     private boolean activeRound = false;
-    private final int HAND_CARD_AMT = 5;
+    private final int HAND_CARD_AMT = 10;
 
     public Table() {
         int playerCount = Console.getInt("number of players", 1, 2, "invalid input");
@@ -25,8 +25,8 @@ public class Table {
     }
 
     public void playGame() {
-//      deck = new StandardDeck();
-      deck = new TestDeck();
+      deck = new StandardDeck();
+//      deck = new TestDeck();
         deck.shuffle();
         gamePoints();
         deal();
