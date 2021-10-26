@@ -78,6 +78,10 @@ public class Hand {
         return holder.getAction(this);
     }
 
+    public int getMeldAction() {
+        return holder.getMeldAction(this);
+    }
+
     public int getValue() {
         int score = 0;
         for (Card card : cards) {

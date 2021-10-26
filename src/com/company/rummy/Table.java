@@ -127,7 +127,16 @@ public class Table {
             case Actor.KNOCK -> knock(activeHand);
             default -> false;
         };
+    }
 
+    private boolean meld(Hand activeHand) {
+        int meldAction = activeHand.getMeldAction();
+        return switch (meldAction) {
+            case Actor.SET -> playSetCard(activeHand);
+            case Actor.RUN -> playRunCard(activeHand);
+            case Actor.PLAY_CARD ->  addCardToMeld(activeHand);
+            default -> false;
+        };
     }
 
     private boolean draw(Hand activeHand) {
@@ -163,7 +172,7 @@ public class Table {
         return true;
     }
 
-    private void playSetCard(Hand activeHand) {
+    private boolean playSetCard(Hand activeHand) {
         List<Card> tempList = new ArrayList<>();
         int meldSize = Console.getInt("Total meld size (3 or 4)", 3, 4, "invalid input");
         int userInput = Console.getInt("\nStarting set card location?", 1, 11, "invalid");
@@ -204,9 +213,10 @@ public class Table {
                 }
 
         }
+        return true;
     }
 
-    private void playRunCard(Hand activeHand) {
+    private boolean playRunCard(Hand activeHand) {
         List<Card> tempList = new ArrayList<>();
         Card runCard;
         int meldSize = Console.getInt("select number of cards to meld (3 or 4)", 3, 4, "invalid input");
@@ -251,6 +261,7 @@ public class Table {
                 layDownMeld(activeHand);
             }
         }
+        return true;
     }
 
     private void goneOut() {
@@ -281,7 +292,7 @@ public class Table {
         Console.spaces();
     }
 
-    private void addCardToMeld(Hand activeHand) {
+    private boolean addCardToMeld(Hand activeHand) {
                 //get sets
         displayPlayAreas();
         String input = Console.getString("\nmeld a card: add to set or run? s/r:", false);
@@ -344,7 +355,7 @@ public class Table {
             }
 
         }
-
+        return true;
     }
 
     private void gamePoints() {
