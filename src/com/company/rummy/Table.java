@@ -95,7 +95,7 @@ public class Table {
                        endRound();
                     }
                 }
-                meld(player);
+//                meld(player);
                 player.sortHand(player);
                 Console.showHandWithIndex(player);
                 while (getInput) {
@@ -130,13 +130,14 @@ public class Table {
         };
     }
 
-    private boolean meld(Hand activeHand) {
+    private void meld(Hand activeHand) {
         int meldAction = activeHand.getMeldAction();
-        return switch (meldAction) {
+        switch (meldAction) {
             case Actor.SET -> playSetCard(activeHand);
             case Actor.RUN -> playRunCard(activeHand);
             case Actor.PLAY_CARD -> addCardToMeld(activeHand);
-            default -> false;
+            default -> {}
+
         };
     }
 
@@ -148,7 +149,7 @@ public class Table {
         activeHand.addCard(newCard);
         activeHand.sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
-//        layDownMeld(activeHand);
+       layDownMeld(activeHand);
         return false;
     }
 
@@ -156,7 +157,7 @@ public class Table {
         activeHand.addCard(discardPile.get(discardPile.size() - 1));
         activeHand.sortHand(activeHand);
         Console.showHandWithIndex(activeHand);
-//        layDownMeld(activeHand);
+        layDownMeld(activeHand);
         return false;
     }
 
@@ -172,6 +173,11 @@ public class Table {
         displayTable();
         return true;
     }
+
+    private boolean back() {
+        return true;
+    }
+
 
     private boolean playSetCard(Hand activeHand) {
         List<Card> tempList = new ArrayList<>();
@@ -247,7 +253,7 @@ public class Table {
                 tempList.clear();
                 activeHand.sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
-//                layDownMeld(activeHand);
+                layDownMeld(activeHand);
                 break;
             }
         }
@@ -259,7 +265,7 @@ public class Table {
             if ("y".equals(lowerPlayMoreCards)) {
                 activeHand.sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
-//                layDownMeld(activeHand);
+                layDownMeld(activeHand);
             }
         }
         return false;
@@ -274,24 +280,15 @@ public class Table {
         }
     }
 
-//    private void layDownMeld(Hand activeHand) {
-//        activeHand.sortHand(activeHand);
-//        displayPlayAreas();
-//        String input = Console.getString("\nmeld set?, run? or card? s/r/c:\nEnter to skip:", false);
-//        String lowerInput = input.toLowerCase();
-//        switch (lowerInput) {
-//            case "s" -> {
-//                playSetCard(activeHand);
-//            }
-//            case "r" -> {
-//                playRunCard(activeHand);
-//            }
-//            case "c" -> {
-//                addCardToMeld(activeHand);
-//            }
-//        }
-//        Console.spaces();
-//    }
+    private void layDownMeld(Hand activeHand) {
+        displayPlayAreas();
+        String input = Console.getString("\n(m)eld?\nenter to skip:", false);
+        String lowerInput = input.toLowerCase();
+        if (lowerInput.equals("m")) {
+            meld(activeHand);
+        }
+        Console.spaces();
+    }
 
     private boolean addCardToMeld(Hand activeHand) {
                 //get sets
@@ -403,7 +400,7 @@ public class Table {
         totalRdPoints();
         String newGame = Console.getString("Would you like to start the next round? y/n",true);
         String lowerNewGameInput = newGame.toLowerCase();
-        if (newGame.equals("y")) {
+        if (lowerNewGameInput.equals("y")) {
             Console.spaces();
             resetGame();
         }else {
