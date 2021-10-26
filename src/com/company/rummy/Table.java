@@ -57,7 +57,6 @@ public class Table {
         }
        endRound();
     }
-
     public void deal() {
         for (int count = 0; count < HAND_CARD_AMT; count++) {
             for (Hand player : hands) {
@@ -67,6 +66,7 @@ public class Table {
         discardPile.add(deck.draw());
     }
 
+ //Display Methods
     public void displayTable() {
         StringBuilder outPut = new StringBuilder();
         for (Hand player : hands) {
@@ -84,6 +84,7 @@ public class Table {
         }
     }
 
+    //Turn Actions
     private void playerTurn() {
         boolean getInput = true;
             for (int count = 0; count < hands.size(); count++) {
@@ -136,8 +137,7 @@ public class Table {
             case Actor.SET -> playSetCard(activeHand);
             case Actor.RUN -> playRunCard(activeHand);
             case Actor.PLAY_CARD -> addCardToMeld(activeHand);
-            default -> {}
-
+            default -> layDownMeld(activeHand);
         };
     }
 
@@ -161,11 +161,6 @@ public class Table {
         return false;
     }
 
-//    private boolean sortHand(Hand activeHand) {
-//        activeHand.getCards().sort(Comparator.comparing(Card::getRank));
-//        return true;
-//    }
-
     private boolean knock(Hand activeHand) {
         activeRound = false;
         System.out.println(activeHand.sumHand());
@@ -174,15 +169,11 @@ public class Table {
         return true;
     }
 
-    private boolean back() {
-        return true;
-    }
-
-
-    private boolean playSetCard(Hand activeHand) {
+    private void playSetCard(Hand activeHand) {
         List<Card> tempList = new ArrayList<>();
         int meldSize = Console.getInt("Total meld size (3 or 4)", 3, 4, "invalid input");
-        int userInput = Console.getInt("\nStarting set card location?", 1, 11, "invalid");
+        Console.showHandWithIndex(activeHand);
+        int userInput = Console.getInt("\nStarting set card location?", 1, 11, "invalid input");
         while (tempList.size() < meldSize) {
             activeHand.sortHand(activeHand);
             int index = userInput - 1;
@@ -196,12 +187,12 @@ public class Table {
             activeHand.removeCard(index);
             }
             else {
-                System.out.println("not a match");
+                System.out.println("invalid set!!!");
                 for (Card cards : tempList) {
                 activeHand.addCard(cards);
                 }
                 tempList.clear();
-//                layDownMeld(activeHand);
+                layDownMeld(activeHand);
                 activeHand.sortHand(activeHand);
                 Console.showHandWithIndex(activeHand);
                 break;
@@ -220,7 +211,6 @@ public class Table {
                 }
 
         }
-        return false;
     }
 
     private boolean playRunCard(Hand activeHand) {
@@ -246,7 +236,7 @@ public class Table {
             String cardSuit = tempList.get(i).getSuit();
             int nextRunCardRank = cardRank + 1;
             if (tempList.get(i + 1).getRank() != nextRunCardRank || !tempList.get(i + 1).getSuit().equals(cardSuit)) {
-                System.out.println("not a match");
+                System.out.println("invalid run!!!");
                 for (Card cards : tempList) {
                     activeHand.addCard(cards);
                 }
@@ -271,14 +261,6 @@ public class Table {
         return false;
     }
 
-    private void goneOut() {
-        for (Hand players : hands) {
-           if (players.getCards().size() == 0) {
-               activeRound = false;
-               endRound();
-           }
-        }
-    }
 
     private void layDownMeld(Hand activeHand) {
         displayPlayAreas();
@@ -354,6 +336,16 @@ public class Table {
 
         }
         return false;
+    }
+
+    //Rounds, scoring and game end.
+    private void goneOut() {
+        for (Hand players : hands) {
+           if (players.getCards().size() == 0) {
+               activeRound = false;
+               endRound();
+           }
+        }
     }
 
     private void gamePoints() {
