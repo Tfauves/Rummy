@@ -37,6 +37,17 @@ public class Player implements Actor {
         return outPut.toString();
     }
 
+    public String availableMeldAction(Hand hand) {
+        StringBuilder output = new StringBuilder();
+        output.append("\nMeld type:\n1. Set\n2. Run\n3. Play a Card\n4. Back");
+        return output.toString();
+    }
+
+    public int getMeldAction(Hand hand) {
+        return Console.getInt(availableMeldAction(hand),1, 4, "invalid");
+    }
+
+
     @Override
     public int getAction(Hand hand) {
         System.out.println(hand.displayHand());
