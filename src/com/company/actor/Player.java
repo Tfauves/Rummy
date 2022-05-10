@@ -47,7 +47,6 @@ public class Player implements Actor {
         return Console.getInt(availableMeldAction(hand),1, 4, "invalid");
     }
 
-
     @Override
     public int getAction(Hand hand) {
         System.out.println(hand.displayHand());

@@ -14,9 +14,6 @@ public class PlayingCard extends Card {
     @Override
     public String display() {
         String outPut;
-//        if (isFaceDown) {
-//            return "<*>";
-//        }
         switch (getRank()) {
             case 1 -> outPut = "AC";
             case 11 -> outPut = "JK";

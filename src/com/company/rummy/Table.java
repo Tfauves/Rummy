@@ -26,7 +26,6 @@ public class Table {
 
     public void playGame() {
       deck = new StandardDeck();
-//      deck = new TestDeck();
         deck.shuffle();
         gamePoints();
         deal();
