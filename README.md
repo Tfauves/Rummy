@@ -31,3 +31,15 @@ GAMEPLAY:
 Each player is dealt 10 cards, they must draw from the deck or the discard pile.
 The player can then form melds based on the cards in their hand or based on current melds if any in the respected play area.
 A player uses the numeric index below the hand output to select cards that can be played alone or in sets/runs. Play continues until a player plays all of their cards carefully making sure they can always discard one card, signaling the end of their turn. Points are awarded according to the rummy rules above.
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/Tfauves/Rummy.git
+```
+
+Navigate to Main class
+
+Run the `private static void main(String[] args)` method
